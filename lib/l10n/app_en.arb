@@ -56,8 +56,8 @@
     "@searchText": {
         "description": "Search text"
     },
-    "showCallBtm": "View All",
-    "@showCallBtm": {
+    "showAllItem": "View All",
+    "@showAllItem": {
         "description": "Show all button"
     },
     "theLatestText": "Latest",
@@ -167,5 +167,21 @@
     "payableAmount": "Payable Amount",
     "@payableAmount": {
         "description": "Payable amount"
+    },
+    "netWorkError": "network error",
+    "@netWorkError": {
+        "description": "Network error"
+    },
+    "unknownError": "unknown error",
+    "@unknownError": {
+        "description": "unknown error"
+    },
+    "theCurrency": "Toman",
+    "@theCurrency": {
+        "description": "The currency"
+    },
+    "thePopular": "popular",
+    "@thePopular": {
+        "description": "The popular"
     }
 }

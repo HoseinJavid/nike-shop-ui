@@ -1,192 +1,187 @@
 {
-    "@@locale": "fa",
-    "appTitle": "نایک",
-    "@appTitle": {
-        "description": "The title of the application"
-    },
-    "welcomeMessage": "خوش آمدید",
-    "@welcomeMessage": {
-        "description": "Welcome message for the user"
-    },
-    "loginButton": "ورود",
-    "@loginButton": {
-        "description": "Text for the login button"
-    },
-    "logoutButton": "خروج",
-    "@logoutButton": {
-        "description": "Text for the logout button"
-    },
-    "userNameButtom": "پست الکترونیکی",
-    "@userNameButtom": {
-        "description": "User name buttom"
-    },
-    "passwordButtom": "رمزعبور",
-    "@passwordButtom": {
-        "description": "Password buttom"
-    },
-    "forgetPasswordButtom": "فراموشی رمزعبور",
-    "@forgetPasswordButtom": {
-      "description": "Forget password buttom"
-      }
-    ,
-    "discriptioinLoginScreen": "اطلاعات حساب خودراواردکنید",
-    "@discriptioinLoginScreen": {
-      "description": "Discriptioin login screen"
-      }
-    ,
-    "homeButtom": "خانه",
-    "@homeButtom": {
-      "description": "Home buttom"
-      }
-    ,
-    "shoppongCardButtom": "سبدخرید",
-    "@shoppongCardButtom": {
-      "description": "Shoppong card buttom"
-      }
-    ,
-    "userInformationButtom": "اطلاعات کاربری",
-    "@userInformationButtom": {
-      "description": "User information buttom"
-      }
-    ,
-    "addToShoppingCardBtm": "افزودن به سبدخرید",
-    "@addToShoppingCardBtm": {
-      "description": "Add to shopping card btm"
-      }
-    ,
-    "paymentBtn": "پرداخت",
-    "@paymentBtn": {
-      "description": "Payment btn"
-      }
-    ,
-    "searchText": "جستجو",
-    "@searchText": {
-      "description": "Search text"
-      }
-    ,
-    "showCallBtm": "مشاهده همه",
-    "@showCallBtm": {
-      "description": "Show call btm"
-      }
-    ,
-    "theLatestText": "جدیدترین",
-    "@theLatestText": {
-      "description": "The latest text"
-      }
-    ,
-    "theCheapestText": "ارزان ترین",
-    "@theCheapestText": {
-      "description": "The cheapest text"
-      }
-    ,
-    "theMostExpensiveText": "گران ترین",
-    "@theMostExpensiveText": {
-      "description": "The most expensive text"
-      }
-    ,
-    "sortingBtm": "مرتب سازی",
-    "@sortingBtm": {
-      "description": "Sorting btm"
-      }
-    ,
-    "sportShoesText": "کفش های ورزشی",
-    "@sportShoesText": {
-      "description": "Sport shoes text"
-      }
-    ,
-    "userCommentText": "نظرات کاربران",
-    "@userCommentText": {
-      "description": "User comment text"
-      }
-    ,
-    "postCommentText": "ثبت نظر",
-    "@postCommentText": {
-      "description": "Post comment text"
-      }
-    ,
-    "removeFromShoppingCard": "حذف از سبد خرید",
-    "@removeFromShoppingCard": {
-      "description": "Remove from shopping card"
-      }
-    ,
-    "detailShoppingCart": "جزییات خرید",
-    "@detailShoppingCart": {
-      "description": "Detail shopping cart"
-      }
-    ,
-    "totalBuyAmount": "مبلغ کل خرید",
-    "@totalBuyAmount": {
-      "description": "Total buy amount"
-      }
-    ,
-    "selectRecipientAndPaymentMethod": "انتخاب تحویل گیرنده و شیوه ی پرداخت",
-    "@selectRecipientAndPaymentMethod": {
-        "description": "Select recipient and payment method"
-    },
-    "fullName": "نام و نام خانوادگی",
-    "@fullName": {
-        "description": "Full name"
-    },
-    "postalCode": "پستی",
-    "@postalCode": {
-        "description": "Postal code"
-    },
-    "contactNumber": "شماره تماس",
-    "@contactNumber": {
-        "description": "Contact number"
-    },
-    "deliveryAddress": "آدرس تحویل گیرنده",
-    "@deliveryAddress": {
-        "description": "Delivery address"
-    },
-    "cashOnDelivery": "پرداخت در محل",
-    "@cashOnDelivery": {
-        "description": "Cash on delivery"
-    },
-    "onlinePayment": "پرداخت اینترنتی",
-    "@onlinePayment": {
-        "description": "Online payment"
-    },
-    "paymentReceipt": "رسید پرداخت",
-    "@paymentReceipt": {
-        "description": "Payment receipt"
-    },
-    "paymentSuccessful": "پرداخت باموفقیت انجام شد",
-    "@paymentSuccessful": {
-        "description": "Payment successful"
-    },
-    "orderStatus": "وضعیت سفارش",
-    "@orderStatus": {
-        "description": "Order status"
-    },
-    "amount": "مبلغ",
-    "@amount": {
-        "description": "Amount"
-    },
-    "orderHistory": "سوابق سفارش",
-    "@orderHistory": {
-        "description": "Order history"
-    },
-    "returnToHomePage": "بازگشت به صفحه اصلی",
-    "@returnToHomePage": {
-        "description": "Return to home page"
-    },
-    "profile": "پروفایل",
-    "@profile": {
-        "description": "Profile"
-    },
-    "wishlist": "لیست علاقه مندی ها",
-    "@wishlist": {
-        "description": "Wishlist"
-    },
-    "shippingCost": "هزینه ی ارسال",
-    "@shippingCost": {
-        "description": "Shipping cost"
-    },
-    "payableAmount": "مبلغ قابل پرداخت",
-    "@payableAmount": {
-        "description": "Payable amount"
-    }
-
-
+  "@@locale": "fa",
+  "appTitle": "نایک",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcomeMessage": "خوش آمدید",
+  "@welcomeMessage": {
+    "description": "Welcome message for the user"
+  },
+  "loginButton": "ورود",
+  "@loginButton": {
+    "description": "Text for the login button"
+  },
+  "logoutButton": "خروج",
+  "@logoutButton": {
+    "description": "Text for the logout button"
+  },
+  "userNameButtom": "پست الکترونیکی",
+  "@userNameButtom": {
+    "description": "User name buttom"
+  },
+  "passwordButtom": "رمزعبور",
+  "@passwordButtom": {
+    "description": "Password buttom"
+  },
+  "forgetPasswordButtom": "فراموشی رمزعبور",
+  "@forgetPasswordButtom": {
+    "description": "Forget password buttom"
+  },
+  "discriptioinLoginScreen": "اطلاعات حساب خودراواردکنید",
+  "@discriptioinLoginScreen": {
+    "description": "Discriptioin login screen"
+  },
+  "homeButtom": "خانه",
+  "@homeButtom": {
+    "description": "Home buttom"
+  },
+  "shoppongCardButtom": "سبدخرید",
+  "@shoppongCardButtom": {
+    "description": "Shoppong card buttom"
+  },
+  "userInformationButtom": "اطلاعات کاربری",
+  "@userInformationButtom": {
+    "description": "User information buttom"
+  },
+  "addToShoppingCardBtm": "افزودن به سبدخرید",
+  "@addToShoppingCardBtm": {
+    "description": "Add to shopping card btm"
+  },
+  "paymentBtn": "پرداخت",
+  "@paymentBtn": {
+    "description": "Payment btn"
+  },
+  "searchText": "جستجو",
+  "@searchText": {
+    "description": "Search text"
+  },
+  "showAllItem": "مشاهده همه",
+  "@showAllItem": {
+    "description": "Show call btm"
+  },
+  "theLatestText": "جدیدترین",
+  "@theLatestText": {
+    "description": "The latest text"
+  },
+  "theCheapestText": "ارزان ترین",
+  "@theCheapestText": {
+    "description": "The cheapest text"
+  },
+  "theMostExpensiveText": "گران ترین",
+  "@theMostExpensiveText": {
+    "description": "The most expensive text"
+  },
+  "sortingBtm": "مرتب سازی",
+  "@sortingBtm": {
+    "description": "Sorting btm"
+  },
+  "sportShoesText": "کفش های ورزشی",
+  "@sportShoesText": {
+    "description": "Sport shoes text"
+  },
+  "userCommentText": "نظرات کاربران",
+  "@userCommentText": {
+    "description": "User comment text"
+  },
+  "postCommentText": "ثبت نظر",
+  "@postCommentText": {
+    "description": "Post comment text"
+  },
+  "removeFromShoppingCard": "حذف از سبد خرید",
+  "@removeFromShoppingCard": {
+    "description": "Remove from shopping card"
+  },
+  "detailShoppingCart": "جزییات خرید",
+  "@detailShoppingCart": {
+    "description": "Detail shopping cart"
+  },
+  "totalBuyAmount": "مبلغ کل خرید",
+  "@totalBuyAmount": {
+    "description": "Total buy amount"
+  },
+  "selectRecipientAndPaymentMethod": "انتخاب تحویل گیرنده و شیوه ی پرداخت",
+  "@selectRecipientAndPaymentMethod": {
+    "description": "Select recipient and payment method"
+  },
+  "fullName": "نام و نام خانوادگی",
+  "@fullName": {
+    "description": "Full name"
+  },
+  "postalCode": "پستی",
+  "@postalCode": {
+    "description": "Postal code"
+  },
+  "contactNumber": "شماره تماس",
+  "@contactNumber": {
+    "description": "Contact number"
+  },
+  "deliveryAddress": "آدرس تحویل گیرنده",
+  "@deliveryAddress": {
+    "description": "Delivery address"
+  },
+  "cashOnDelivery": "پرداخت در محل",
+  "@cashOnDelivery": {
+    "description": "Cash on delivery"
+  },
+  "onlinePayment": "پرداخت اینترنتی",
+  "@onlinePayment": {
+    "description": "Online payment"
+  },
+  "paymentReceipt": "رسید پرداخت",
+  "@paymentReceipt": {
+    "description": "Payment receipt"
+  },
+  "paymentSuccessful": "پرداخت باموفقیت انجام شد",
+  "@paymentSuccessful": {
+    "description": "Payment successful"
+  },
+  "orderStatus": "وضعیت سفارش",
+  "@orderStatus": {
+    "description": "Order status"
+  },
+  "amount": "مبلغ",
+  "@amount": {
+    "description": "Amount"
+  },
+  "orderHistory": "سوابق سفارش",
+  "@orderHistory": {
+    "description": "Order history"
+  },
+  "returnToHomePage": "بازگشت به صفحه اصلی",
+  "@returnToHomePage": {
+    "description": "Return to home page"
+  },
+  "profile": "پروفایل",
+  "@profile": {
+    "description": "Profile"
+  },
+  "wishlist": "لیست علاقه مندی ها",
+  "@wishlist": {
+    "description": "Wishlist"
+  },
+  "shippingCost": "هزینه ی ارسال",
+  "@shippingCost": {
+    "description": "Shipping cost"
+  },
+  "payableAmount": "مبلغ قابل پرداخت",
+  "@payableAmount": {
+    "description": "Payable amount"
+  },
+  "netWorkError": "خطا در اتصال به شبکه",
+  "@netWorkError": {
+    "description": "Network error"
+  },
+  "unknownError": "خطای نامشخص",
+  "@unknownError": {
+    "description": "unknown error"
+  },
+  "theCurrency": "تومان",
+  "@theCurrency": {
+    "description": "The currency"
+  },
+  "thePopular": "محبوب ترین",
+  "@thePopular": {
+    "description": "The popular"
+  }
 }

@@ -25,6 +25,8 @@ dependencies:
   provider: ^6.1.2
   flutter_bloc: ^9.0.0
   sqflite: ^2.4.1
+  dio: ^5.8.0+1
+  cached_network_image: ^3.4.1
 
 
 
@@ -50,6 +52,8 @@ flutter:
   assets:
     - assets/animation/splash/nike.json
     - assets/img/nike_logo_wite.png
+    - assets/img/nike_logo_dark.png
+
 
 flutter_native_splash:
   color: "#262A35" # رنگ پس‌زمینه صفحه اسپلش
