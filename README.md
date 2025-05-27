@@ -1,16 +1,18 @@
-# nike_ecommerce
+# 🏃‍♂️ Nike Sports Shoes Shopping App (Persian)
 
-A new Flutter project.
+This is a modern and user-friendly mobile e-commerce application designed for browsing and purchasing Nike sports shoes. The app features a sleek and intuitive interface tailored for Persian (Farsi) users, and supports functionalities such as login, product browsing, product details, shopping cart, and checkout.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- 🔐 **User Authentication**: Login with email and password.
+- 🏠 **Home Screen**: Highlighted promotions and featured products.
+- 🛍️ **Product List**: View all available Nike sports shoes with filters and sorting.
+- 👟 **Product Details**: See detailed product information, specifications, user reviews, and images.
+- 🛒 **Cart**: Add or remove items from the cart and view total price breakdown.
+- 💳 **Checkout**: Seamless checkout experience with summary of charges.
 
-A few resources to get you started if this is your first Flutter project:
+## 🧩 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **UI/UX Design**: Adobe XD / Figma (based on the provided screenshots)
+- **Language**: Persian (Farsi) RTL support
+- **Platform**: Likely Flutter, React Native, or other cross-platform framework (to be updated once codebase is available)
