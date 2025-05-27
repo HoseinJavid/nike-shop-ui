@@ -14,8 +14,9 @@ final class HomeError extends HomeState {
 }
 
 final class HomeSucces extends HomeState {
-  final List<Product> products;
+  final List<Product>? products;
   final List<Banner> banners;
+  final int sortOptions;
 
-  HomeSucces({required this.products, required this.banners});
+  HomeSucces(this.sortOptions, {required this.products, required this.banners});
 }

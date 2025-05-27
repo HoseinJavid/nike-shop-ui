@@ -1,4 +1,5 @@
 import 'package:nike_ecommerce/common/app_constants.dart';
+import 'package:nike_ecommerce/screen/home/bloc/home_bloc.dart';
 
 import '../model/product.dart';
 import '../source/product_data_source.dart';
@@ -21,5 +22,13 @@ class ProductRepository extends ImplProductRepository {
   @override
   Future<List<Product>> search(String keyword) {
     return productDataSource.search(keyword);
+  }
+
+  Stream<Product> getProductsStream({required ChangeSortOption changeSortOption}) async* {
+    final productList = await getProducts(sortOptions: changeSortOption.sortOption);
+    for (final product in productList) {
+      await Future.delayed(Duration(milliseconds: 300)); // انیمیشن تدریجی
+      yield product;
+    }
   }
 }

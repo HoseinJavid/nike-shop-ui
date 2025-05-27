@@ -13,7 +13,7 @@ class RemoteProductDataSource extends ImplRemoteProductDataSource {
 
   RemoteProductDataSource({required this.dio});
   @override
-  Future<List<Product>> getProducts({int sortOptions = SortOptions.popular}) {
+  Future<List<Product>> getProducts({int sortOptions = SortOptions.latest}) {
     String api = 'product/list?sort=$sortOptions';
     return dio.get(api).then((response) {
       List<Product> products = [];

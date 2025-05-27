@@ -6,13 +6,13 @@ import 'package:nike_ecommerce/data/repo/banner_repository.dart';
 import 'package:nike_ecommerce/data/repo/product_repository.dart';
 import 'package:nike_ecommerce/data/source/banner_data_source.dart';
 import 'package:nike_ecommerce/data/source/product_data_source.dart';
+import 'package:nike_ecommerce/l10n/app_localizations.dart';
 import 'package:nike_ecommerce/screen/home/bloc/home_bloc.dart';
 import 'package:nike_ecommerce/screen/home/home.dart';
 import 'package:nike_ecommerce/screen/login/bloc/login_bloc.dart';
 import 'package:nike_ecommerce/screen/login/login.dart';
 import 'package:nike_ecommerce/screen/splash/splash.dart';
 import 'package:nike_ecommerce/common/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 var dio = DioClient.dio;
 

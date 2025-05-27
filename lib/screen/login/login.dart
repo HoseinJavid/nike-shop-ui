@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
+import 'package:nike_ecommerce/l10n/app_localizations.dart';
 import 'package:nike_ecommerce/screen/login/bloc/login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
