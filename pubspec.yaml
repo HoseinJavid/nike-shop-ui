@@ -34,7 +34,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/img/nike_logo_wite.png
+    - assets/img/
     - assets/fonts/
 
   fonts:

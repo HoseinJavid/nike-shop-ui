@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class LightTheme {
   static const Color primaryColor = Color(0xff217CF3);
   static const secondryColor = Color(0xff242936);
-  static const Color tertiaryColor = Color(0xffF5F5F5);
+  static const Color tertiaryColor = Colors.white;
   static const Color primaryButtonColor = Color(0xffFFFFFF);
   static const Color primaryTextColor = Color(0xff000000);
   static const Color secondaryTextColor = Color(0xff7A7A7A);
@@ -35,6 +35,10 @@ class LightTheme {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: primaryColor, width: 1.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.grey.shade400, width: 1.5),
         ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
