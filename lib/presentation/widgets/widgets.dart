@@ -95,7 +95,7 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 325,
+      height: 340,
       width: MediaQuery.of(context).size.width,
       child: ListView(
         physics: const BouncingScrollPhysics(),
@@ -103,6 +103,18 @@ class ProductList extends StatelessWidget {
         children: [
           Row(
             children: [
+              ProductWidget(
+                imageUrl:
+                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+              ),
+              ProductWidget(
+                imageUrl:
+                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+              ),
+              ProductWidget(
+                imageUrl:
+                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+              ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
@@ -158,7 +170,12 @@ class TitleProductWidget extends StatelessWidget {
 /// Product widget displaying product image, title, price, and favorite icon.
 class ProductWidget extends StatefulWidget {
   final String imageUrl;
-  const ProductWidget({super.key, required this.imageUrl});
+  final LayoutType layoutType;
+  const ProductWidget({
+    super.key,
+    required this.imageUrl,
+    this.layoutType = LayoutType.defult,
+  });
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -169,7 +186,9 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+      padding: widget.layoutType == LayoutType.grid
+          ? const EdgeInsets.all(0)
+          : const EdgeInsets.all(8),
       child: InkWell(
         onTap: () {
           // Navigate to product details page
@@ -185,8 +204,11 @@ class _ProductWidgetState extends State<ProductWidget> {
               Stack(
                 children: [
                   SizedBox(
-                    width: 200,
+                    // height: widget.layoutType == LayoutType.grid ? 300 : 200,
                     height: 200,
+                    width: widget.layoutType == LayoutType.grid
+                        ? double.infinity
+                        : 200,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
@@ -228,7 +250,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 'کفش ورزشی دویدن مخصوص نایکی ایرمکس',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 10),
               Text(
                 '3,500,000 تومان',
                 style: TextStyle(
@@ -239,7 +261,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
               Text(
                 '2,800,000 تومان',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -259,3 +281,5 @@ class BannerWidget extends StatelessWidget {
     return CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.fill);
   }
 }
+
+enum LayoutType { grid, defult }
