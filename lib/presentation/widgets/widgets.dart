@@ -186,7 +186,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.layoutType == LayoutType.grid
+      padding: widget.layoutType == LayoutType.defult
           ? const EdgeInsets.all(0)
           : const EdgeInsets.all(8),
       child: InkWell(
@@ -204,9 +204,9 @@ class _ProductWidgetState extends State<ProductWidget> {
               Stack(
                 children: [
                   SizedBox(
-                    // height: widget.layoutType == LayoutType.grid ? 300 : 200,
-                    height: 200,
-                    width: widget.layoutType == LayoutType.grid
+                    height: widget.layoutType == LayoutType.defult ? 300 : 200,
+                    // height: 200,
+                    width: widget.layoutType == LayoutType.defult
                         ? double.infinity
                         : 200,
                     child: ClipRRect(
@@ -248,13 +248,16 @@ class _ProductWidgetState extends State<ProductWidget> {
               const SizedBox(height: 8),
               Text(
                 'کفش ورزشی دویدن مخصوص نایکی ایرمکس',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                style: TextStyle(
+                  fontSize: widget.layoutType == LayoutType.grid ? 16 : 20,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               SizedBox(height: 10),
               Text(
                 '3,500,000 تومان',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: widget.layoutType == LayoutType.grid ? 14 : 16,
                   color: Colors.grey,
                   decoration: TextDecoration.lineThrough,
                 ),
@@ -282,9 +285,22 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+  // Custom AppBar widget with a title, back button, and shopping cart icon.
 
+  final ValueChanged<LayoutType> onChangedLayoutType;
+  const CustomAppBar({super.key, required this.onChangedLayoutType});
+
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(200.0);
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  bool selectGrid = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -325,10 +341,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Expanded(child: SizedBox()),
                 IconButton(
-                  icon: Icon(
-                    CupertinoIcons.shopping_cart,
-                    size: 30.0,
-                    color: Colors.black,
+                  icon: Badge.count(
+                    alignment: AlignmentDirectional.centerEnd,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    count: 3,
+                    child: Icon(
+                      CupertinoIcons.shopping_cart,
+                      size: 30.0,
+                      color: Colors.black,
+                    ),
                   ),
                   onPressed: () {},
                 ),
@@ -344,7 +365,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return SortTypeWidget();
+                        return ContainerWidgetButtomSheet();
                       },
                     );
                   },
@@ -374,8 +395,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Expanded(child: SizedBox()),
                 CustomVerticalDivider(height: 30, color: Colors.grey.shade300),
                 IconButton(
-                  icon: Icon(CupertinoIcons.square_grid_2x2),
-                  onPressed: () {},
+                  icon: Icon(
+                    selectGrid == true
+                        ? CupertinoIcons.square_grid_2x2
+                        : CupertinoIcons.square_list,
+                  ),
+                  onPressed: () {
+                    // Handle grid view action
+                    // You can toggle between grid and list view here
+                    setState(() {
+                      selectGrid = !selectGrid;
+                      widget.onChangedLayoutType(
+                        selectGrid ? LayoutType.grid : LayoutType.defult,
+                      );
+                    });
+                  },
                 ),
                 SizedBox(width: 4),
               ],
@@ -385,20 +419,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(200.0);
 }
 
-class SortTypeWidget extends StatefulWidget {
-  const SortTypeWidget({super.key});
+class ContainerWidgetButtomSheet extends StatefulWidget {
+  const ContainerWidgetButtomSheet({super.key});
 
   @override
-  State<SortTypeWidget> createState() => _SortTypeWidgetState();
+  State<ContainerWidgetButtomSheet> createState() =>
+      _ContainerWidgetButtomSheetState();
 }
 
-class _SortTypeWidgetState extends State<SortTypeWidget> {
+class _ContainerWidgetButtomSheetState
+    extends State<ContainerWidgetButtomSheet> {
   SortType selectedSortType = SortType.newest;
   @override
   Widget build(BuildContext context) {
@@ -510,6 +542,10 @@ class _SortWidgetState extends State<SortWidget> {
       onTap: () {
         // Handle search action
         widget.onChangedSortType(widget.sortType);
+        Future.delayed(Duration(milliseconds: 300), () {
+          // Close the bottom sheet after a delay
+          Navigator.pop(context); // Close the bottom sheet
+        });
       },
       child: Padding(
         padding: const EdgeInsets.all(14.0),
