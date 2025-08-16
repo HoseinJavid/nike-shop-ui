@@ -282,4 +282,270 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 50.0),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.back,
+                    size: 30.0,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {},
+                ),
+                Text(
+                  'کفش های ورزشی',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(child: SizedBox()),
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.shopping_cart,
+                    size: 30.0,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(CupertinoIcons.sort_down, size: 30),
+                  onPressed: () {
+                    // Handle sort action
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return SortTypeWidget();
+                      },
+                    );
+                  },
+                ),
+                SizedBox(width: 4),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'مرتب سازی',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+
+                    Text(
+                      'پرفروش ترین',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(child: SizedBox()),
+                CustomVerticalDivider(height: 30, color: Colors.grey.shade300),
+                IconButton(
+                  icon: Icon(CupertinoIcons.square_grid_2x2),
+                  onPressed: () {},
+                ),
+                SizedBox(width: 4),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(200.0);
+}
+
+class SortTypeWidget extends StatefulWidget {
+  const SortTypeWidget({super.key});
+
+  @override
+  State<SortTypeWidget> createState() => _SortTypeWidgetState();
+}
+
+class _SortTypeWidgetState extends State<SortTypeWidget> {
+  SortType selectedSortType = SortType.newest;
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'مرتب سازی براساس',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          SortWidget(
+            title: 'جدیدترین',
+            sortType: SortType.newest,
+            selectedSortType: selectedSortType,
+            onChangedSortType: (SortType value) {
+              setState(() {
+                selectedSortType = value;
+              });
+            },
+          ),
+          SortWidget(
+            title: 'پرفروش ترین',
+            sortType: SortType.bestSelling,
+            selectedSortType: selectedSortType,
+            onChangedSortType: (SortType value) {
+              setState(() {
+                selectedSortType = value;
+              });
+            },
+          ),
+          SortWidget(
+            title: 'ارزان ترین',
+            sortType: SortType.cheapest,
+            selectedSortType: selectedSortType,
+            onChangedSortType: (SortType value) {
+              setState(() {
+                selectedSortType = value;
+              });
+            },
+          ),
+          SortWidget(
+            title: 'گران ترین',
+            sortType: SortType.mostExpensive,
+            selectedSortType: selectedSortType,
+            onChangedSortType: (SortType value) {
+              setState(() {
+                selectedSortType = value;
+              });
+            },
+          ),
+          SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomVerticalDivider extends StatelessWidget {
+  final double height;
+  final Color color;
+  final double width;
+  const CustomVerticalDivider({
+    super.key,
+    required this.height,
+    this.color = Colors.grey,
+    this.width = 1.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: color, height: height, width: width);
+  }
+}
+
+class SortWidget extends StatefulWidget {
+  final String title;
+  final SortType sortType;
+  final SortType selectedSortType;
+  final ValueChanged<SortType> onChangedSortType;
+  const SortWidget({
+    super.key,
+    required this.title,
+    required this.sortType,
+    required this.selectedSortType,
+    required this.onChangedSortType,
+  });
+
+  @override
+  State<SortWidget> createState() => _SortWidgetState();
+}
+
+class _SortWidgetState extends State<SortWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        // Handle search action
+        widget.onChangedSortType(widget.sortType);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Row(
+          children: [
+            Text(
+              widget.title,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Expanded(child: SizedBox()),
+            CustomVerticalDivider(
+              height: 24,
+              color: Colors.grey.shade300,
+              width: 1,
+            ),
+            SizedBox(width: 10),
+            Radio(
+              visualDensity: VisualDensity.compact,
+              fillColor: WidgetStateProperty.resolveWith((states) {
+                if (states.contains(WidgetState.selected)) {
+                  return Theme.of(context).primaryColor;
+                } else {
+                  return Colors.grey.shade500;
+                }
+              }),
+              value: widget.sortType,
+              groupValue: widget.selectedSortType,
+              onChanged: (value) => widget.onChangedSortType(value!),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 enum LayoutType { grid, defult }
+
+enum SortType { newest, bestSelling, cheapest, mostExpensive }
