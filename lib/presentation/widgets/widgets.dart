@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:practice/core/constants/constant.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-/// Custom text field widget for email/password input with styling.
-class CustomTextFild extends StatelessWidget {
+/// --------------------------------------------------------------------------
+class McwTextFild extends StatelessWidget {
   /// Custom Text Field for email input
   final String hintText;
   final bool obsecureText;
-  const CustomTextFild({
+  const McwTextFild({
     super.key,
     required this.hintText,
     this.obsecureText = false,
@@ -38,7 +39,7 @@ class CustomTextFild extends StatelessWidget {
   }
 }
 
-/// Banner list widget displaying a carousel of banners with page indicator.
+/// --------------------------------------------------------------------------
 class BannerList extends StatelessWidget {
   const BannerList({super.key});
 
@@ -88,7 +89,7 @@ class BannerList extends StatelessWidget {
   }
 }
 
-/// Horizontal product list widget for displaying multiple products.
+/// --------------------------------------------------------------------------
 class ProductList extends StatelessWidget {
   const ProductList({super.key});
 
@@ -106,26 +107,32 @@ class ProductList extends StatelessWidget {
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
               ProductWidget(
                 imageUrl:
                     'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+                layoutType: LayoutType.horizontalList,
               ),
             ],
           ),
@@ -135,7 +142,7 @@ class ProductList extends StatelessWidget {
   }
 }
 
-/// Widget for displaying the title of a product section and a "view all" button.
+/// --------------------------------------------------------------------------
 class TitleProductWidget extends StatelessWidget {
   final String title;
   const TitleProductWidget({super.key, required this.title});
@@ -167,14 +174,14 @@ class TitleProductWidget extends StatelessWidget {
   }
 }
 
-/// Product widget displaying product image, title, price, and favorite icon.
+/// --------------------------------------------------------------------------
 class ProductWidget extends StatefulWidget {
   final String imageUrl;
   final LayoutType layoutType;
   const ProductWidget({
     super.key,
     required this.imageUrl,
-    this.layoutType = LayoutType.defult,
+    required this.layoutType,
   });
 
   @override
@@ -186,7 +193,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.layoutType == LayoutType.defult
+      padding: widget.layoutType == LayoutType.verticallList
           ? const EdgeInsets.all(0)
           : const EdgeInsets.all(8),
       child: InkWell(
@@ -204,9 +211,11 @@ class _ProductWidgetState extends State<ProductWidget> {
               Stack(
                 children: [
                   SizedBox(
-                    height: widget.layoutType == LayoutType.defult ? 300 : 200,
+                    height: widget.layoutType == LayoutType.verticallList
+                        ? 300
+                        : 200,
                     // height: 200,
-                    width: widget.layoutType == LayoutType.defult
+                    width: widget.layoutType == LayoutType.verticallList
                         ? double.infinity
                         : 200,
                     child: ClipRRect(
@@ -249,7 +258,11 @@ class _ProductWidgetState extends State<ProductWidget> {
               Text(
                 'کفش ورزشی دویدن مخصوص نایکی ایرمکس',
                 style: TextStyle(
-                  fontSize: widget.layoutType == LayoutType.grid ? 16 : 20,
+                  fontSize:
+                      widget.layoutType == LayoutType.grid ||
+                          widget.layoutType == LayoutType.horizontalList
+                      ? 16
+                      : 20,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -257,7 +270,11 @@ class _ProductWidgetState extends State<ProductWidget> {
               Text(
                 '3,500,000 تومان',
                 style: TextStyle(
-                  fontSize: widget.layoutType == LayoutType.grid ? 14 : 16,
+                  fontSize:
+                      widget.layoutType == LayoutType.grid ||
+                          widget.layoutType == LayoutType.grid
+                      ? 14
+                      : 16,
                   color: Colors.grey,
                   decoration: TextDecoration.lineThrough,
                 ),
@@ -274,7 +291,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   }
 }
 
-/// Banner widget for displaying a single banner image.
+/// --------------------------------------------------------------------------
 class BannerWidget extends StatelessWidget {
   final String imageUrl;
   const BannerWidget({super.key, required this.imageUrl});
@@ -285,21 +302,22 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  // Custom AppBar widget with a title, back button, and shopping cart icon.
-
+/// --------------------------------------------------------------------------
+class McwAppBarProductList extends StatefulWidget
+    implements PreferredSizeWidget {
+  /// --------------------------------------------------------------------------
   final ValueChanged<LayoutType> onChangedLayoutType;
-  const CustomAppBar({super.key, required this.onChangedLayoutType});
+  const McwAppBarProductList({super.key, required this.onChangedLayoutType});
 
   @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
+  State<McwAppBarProductList> createState() => _McwAppBarProductListState();
 
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(200.0);
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _McwAppBarProductListState extends State<McwAppBarProductList> {
   bool selectGrid = true;
   @override
   Widget build(BuildContext context) {
@@ -393,7 +411,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ],
                 ),
                 Expanded(child: SizedBox()),
-                CustomVerticalDivider(height: 30, color: Colors.grey.shade300),
+                McwVerticalDivider(height: 30, color: Colors.grey.shade300),
                 IconButton(
                   icon: Icon(
                     selectGrid == true
@@ -406,7 +424,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     setState(() {
                       selectGrid = !selectGrid;
                       widget.onChangedLayoutType(
-                        selectGrid ? LayoutType.grid : LayoutType.defult,
+                        selectGrid ? LayoutType.grid : LayoutType.verticallList,
                       );
                     });
                   },
@@ -421,6 +439,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   }
 }
 
+/// --------------------------------------------------------------------------
 class ContainerWidgetButtomSheet extends StatefulWidget {
   const ContainerWidgetButtomSheet({super.key});
 
@@ -501,11 +520,12 @@ class _ContainerWidgetButtomSheetState
   }
 }
 
-class CustomVerticalDivider extends StatelessWidget {
+/// --------------------------------------------------------------------------
+class McwVerticalDivider extends StatelessWidget {
   final double height;
   final Color color;
   final double width;
-  const CustomVerticalDivider({
+  const McwVerticalDivider({
     super.key,
     required this.height,
     this.color = Colors.grey,
@@ -518,6 +538,7 @@ class CustomVerticalDivider extends StatelessWidget {
   }
 }
 
+/// --------------------------------------------------------------------------
 class SortWidget extends StatefulWidget {
   final String title;
   final SortType sortType;
@@ -556,7 +577,7 @@ class _SortWidgetState extends State<SortWidget> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Expanded(child: SizedBox()),
-            CustomVerticalDivider(
+            McwVerticalDivider(
               height: 24,
               color: Colors.grey.shade300,
               width: 1,
@@ -582,6 +603,181 @@ class _SortWidgetState extends State<SortWidget> {
   }
 }
 
-enum LayoutType { grid, defult }
+/// --------------------------------------------------------------------------
+class McwFAB extends StatelessWidget {
+  final String title;
+  const McwFAB({super.key, required this.title});
 
-enum SortType { newest, bestSelling, cheapest, mostExpensive }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(50),
+        onTap: () {
+          // Handle add to cart action
+        },
+
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 60,
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).secondaryHeaderColor,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Text(
+              textAlign: TextAlign.center,
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// --------------------------------------------------------------------------
+class McwButtomSheet extends StatelessWidget {
+  const McwButtomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '2,500,000 تومان',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            onPressed: () {
+              // Handle add to cart action
+            },
+            child: Text('افزودن به سبد خرید'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// --------------------------------------------------------------------------
+class McwAppBarProductDetail extends StatelessWidget {
+  const McwAppBarProductDetail({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      expandedHeight: MediaQuery.of(context).size.height * 0.4,
+      // floating: true,
+      // snap: true,
+      // stretch: true,
+      pinned: true,
+      forceElevated: true,
+      backgroundColor: Colors.white,
+      elevation: 10,
+      shadowColor: Colors.black.withAlpha(100),
+      flexibleSpace: FlexibleSpaceBar(
+        background: CachedNetworkImage(
+          imageUrl:
+              'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+          fit: BoxFit.cover,
+        ),
+      ),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new),
+        onPressed: () {
+          // Navigator.pop(context);
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.favorite_border),
+          onPressed: () {
+            // Handle favorite action
+          },
+        ),
+      ],
+    );
+  }
+}
+
+/// --------------------------------------------------------------------------
+class CommentWidget extends StatelessWidget {
+  const CommentWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4.0, right: 16, left: 16),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black.withAlpha(20)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'خیلی شیک وباحاله',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    'چهارشنبه 20 مرداد 1404',
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                ],
+              ),
+              Text(
+                'توسط حسین جاوید',
+                style: TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+
+              SizedBox(height: 8),
+              Text(
+                'این کتونی واقعا عالیه و من ازش خیلی راضی هستم. کیفیت ساخت بسیار بالاست و برای دویدن بسیار راحت است.',
+                style: TextStyle(fontSize: 14),
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star, color: Colors.amber),
+                  Icon(Icons.star_half, color: Colors.amber),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// --------------------------------------------------------------------------

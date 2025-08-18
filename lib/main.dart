@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:practice/core/theme/theme.dart';
 import 'package:practice/presentation/pages/auth_page.dart';
+import 'package:practice/presentation/pages/cart_page.dart';
 import 'package:practice/presentation/pages/home_page.dart';
+import 'package:practice/presentation/pages/product_detail_page.dart';
 import 'package:practice/presentation/pages/product_list_page.dart';
+import 'package:practice/presentation/pages/profile_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,8 +21,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Directionality(
         textDirection: TextDirection.rtl,
-        child: const ProductListPage(),
+        // child: const ProductListPage(),
         // child: HomePage(),
+        // child: ProductDetailPage(),
+        // child: CartPage(),
+        child: ProfilePage(),
       ),
     );
   }

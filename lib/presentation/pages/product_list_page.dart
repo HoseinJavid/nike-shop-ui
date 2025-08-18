@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practice/core/constants/constant.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
 class ProductListPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: McwAppBarProductList(
         onChangedLayoutType: (LayoutType value) {
           // Handle layout type change
           // You can update the state or perform any action based on the layout type
@@ -34,7 +35,7 @@ class _ProductListPageState extends State<ProductListPage> {
           crossAxisSpacing: 8,
           childAspectRatio: layoutType == LayoutType.grid ? 0.65 : 0.8,
           mainAxisSpacing: layoutType == LayoutType.grid ? 0.0 : 8.0,
-        
+
           children: [
             ProductWidget(
               layoutType: layoutType,
@@ -51,7 +52,7 @@ class _ProductListPageState extends State<ProductListPage> {
               imageUrl:
                   'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
             ),
-        
+
             ProductWidget(
               layoutType: layoutType,
               imageUrl:

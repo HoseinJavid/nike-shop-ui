@@ -14,6 +14,7 @@ class LightTheme {
     return ThemeData(
       fontFamily: locale.languageCode == 'fa' ? 'IranYekan' : null,
       primaryColor: primaryColor,
+      secondaryHeaderColor: secondryColor,
       scaffoldBackgroundColor: tertiaryColor,
       textTheme: TextTheme(
         bodyLarge: TextStyle(color: primaryTextColor),

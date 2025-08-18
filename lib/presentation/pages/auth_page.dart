@@ -3,7 +3,7 @@
 /// This page displays a login form with the following features:
 /// - RTL (Right-to-Left) text direction for Persian language support.
 /// - Nike logo and welcome message.
-/// - Input fields for email and password using [CustomTextFild].
+/// - Input fields for email and password using [McwTextFild].
 /// - Login button styled with rounded corners.
 /// - Option to navigate to the registration page.
 /// 
@@ -56,9 +56,9 @@ class _AuthPageState extends State<AuthPage> {
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               SizedBox(height: 30),
-              CustomTextFild(hintText: 'پست الکترونیکی'),
+              McwTextFild(hintText: 'پست الکترونیکی'),
               SizedBox(height: 15),
-              CustomTextFild(hintText: 'رمز عبور', obsecureText: true),
+              McwTextFild(hintText: 'رمز عبور', obsecureText: true),
               SizedBox(height: 15),
               SizedBox(
                 width: MediaQuery.of(context).size.width / 1.2,
