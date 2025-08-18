@@ -11,17 +11,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: McwFAB(title: 'پرداخت'),
       backgroundColor: Color(0xfff4f4f4),
-      appBar: AppBar(
-        title: Text('سبد خرید'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Navigator.pop(context);
-          },
-        ),
-        actions: [],
-        backgroundColor: Colors.white,
-      ),
+      appBar: CommonAppbar(title: 'سبدخرید'),
       body: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 8),
         child: SizedBox.expand(
@@ -144,89 +134,90 @@ class CartPage extends StatelessWidget {
               SizedBox(height: 32),
               Row(children: [Text('جزعیات خرید')]),
               SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'مبلغ کل خرید',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          '1,200,000 تومان',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Divider(color: Colors.grey.shade300, thickness: 1),
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'هزینه ارسال',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'رایگان',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Divider(color: Colors.grey.shade300, thickness: 1),
-                    SizedBox(height: 8),
+              CartInfoWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'مبلغ نهایی',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          '5,200,000 تومان',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+class CartInfoWidget extends StatelessWidget {
+  final EdgeInsetsGeometry padding;
+  const CartInfoWidget({super.key, this.padding = const EdgeInsets.all(16)});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'مبلغ کل خرید',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '1,200,000 تومان',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ],
           ),
-        ),
+          SizedBox(height: 8),
+          Divider(color: Colors.grey.shade300, thickness: 1),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'هزینه ارسال',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'رایگان',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Divider(color: Colors.grey.shade300, thickness: 1),
+          SizedBox(height: 8),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'مبلغ نهایی',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '5,200,000 تومان',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

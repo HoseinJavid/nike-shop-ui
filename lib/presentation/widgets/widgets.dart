@@ -781,3 +781,96 @@ class CommentWidget extends StatelessWidget {
 }
 
 /// --------------------------------------------------------------------------
+
+class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  const CommonAppbar({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          // Navigator.pop(context);
+        },
+      ),
+      actions: [],
+      backgroundColor: Colors.white,
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(60);
+}
+
+/// --------------------------------------------------------------------------
+
+class McwElevatedButton extends StatelessWidget {
+  final OnTapCallback ontap;
+  final ThemeData themeData;
+  final String text;
+
+  const McwElevatedButton({
+    super.key,
+    required this.themeData,
+    required this.ontap,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 47,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(themeData.primaryColor),
+        ),
+        onPressed: () {
+          ontap();
+        },
+        child: Text(text, style: TextStyle(fontSize: 16)),
+      ),
+    );
+  }
+}
+
+/// --------------------------------------------------------------------------
+
+class McwTextButton extends StatelessWidget {
+  final String text;
+  final OnTapCallback onTap;
+  const McwTextButton({
+    super.key,
+    required this.themeData,
+    required this.onTap,
+    required this.text,
+  });
+
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 47,
+      child: TextButton(
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(10),
+            ),
+          ),
+        ),
+        onPressed: () {
+          onTap();
+        },
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 16, color: themeData.primaryColor),
+        ),
+      ),
+    );
+  }
+}

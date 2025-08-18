@@ -25,7 +25,7 @@ class LightTheme {
           overlayColor: primaryColor.withOpacity(0.1),
           backgroundColor: secondryColor,
           foregroundColor: primaryButtonColor,
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          // textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -35,13 +35,15 @@ class LightTheme {
         hintStyle: TextStyle(color: secondaryTextColor),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: primaryColor, width: 1.5),
+          borderSide: BorderSide(color: primaryColor, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey.shade400, width: 1.5),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.5),
         ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        labelStyle: TextStyle(color: Colors.grey.shade500),
+        floatingLabelStyle: TextStyle(color: primaryColor),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

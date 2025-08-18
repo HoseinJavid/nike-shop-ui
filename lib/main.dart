@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:practice/core/theme/theme.dart';
+import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
-import 'package:practice/presentation/pages/home_page.dart';
-import 'package:practice/presentation/pages/product_detail_page.dart';
-import 'package:practice/presentation/pages/product_list_page.dart';
+import 'package:practice/presentation/pages/paymentResult_page.dart';
 import 'package:practice/presentation/pages/profile_page.dart';
 
 void main() {
@@ -25,7 +24,10 @@ class MainApp extends StatelessWidget {
         // child: HomePage(),
         // child: ProductDetailPage(),
         // child: CartPage(),
-        child: ProfilePage(),
+        // child: ProfilePage(),
+        child: PaymentResultPage(),
+        // child: PaymentInfoPage(),
+        // child: AuthPage(),
       ),
     );
   }
