@@ -16,41 +16,44 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    Assets.img.nikeLogoDark.path,
-                    width: 80,
-                    height: 80,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'جستجوی محصولات',
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Theme.of(context).primaryColor,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      Assets.img.nikeLogoDark.path,
+                      width: 80,
+                      height: 80,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, left: 8),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'جستجوی محصولات',
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10),
-              BannerList(),
-              TitleProductWidget(title: 'محصولات جدید'),
-              ProductList(),
-              TitleProductWidget(title: 'محصولات پرفروش'),
-              ProductList(),
-            ],
+                SizedBox(height: 10),
+                BannerList(),
+                TitleProductWidget(title: 'محصولات جدید'),
+                ProductList(),
+                TitleProductWidget(title: 'محصولات پرفروش'),
+                ProductList(),
+              ],
+            ),
           ),
         ),
       ),
