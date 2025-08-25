@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
-import 'package:practice/presentation/pages/home_page.dart';
+import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/pages/paymentResult_page.dart';
 import 'package:practice/presentation/pages/product_detail_page.dart';
 import 'package:practice/presentation/pages/product_list_page.dart';

@@ -3,12 +3,12 @@ import 'package:practice/core/theme/theme.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
-import 'package:practice/presentation/pages/home_page.dart';
+import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/pages/paymentResult_page.dart';
 import 'package:practice/presentation/pages/product_detail_page.dart';
 import 'package:practice/presentation/pages/product_list_page.dart';
 import 'package:practice/presentation/pages/profile_page.dart';
-import 'package:practice/root.dart';
+import 'package:practice/presentation/pages/root_page.dart';
 
 void main() {
   runApp(const MainApp());
