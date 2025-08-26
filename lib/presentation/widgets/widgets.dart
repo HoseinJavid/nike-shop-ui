@@ -54,22 +54,11 @@ class BannerList extends StatelessWidget {
       children: [
         SizedBox(
           height: 250,
-          child: PageView(
-            controller: pageController,
-            children: [
-              BannerWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/banner_1.jpg',
-              ),
-              BannerWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/banner_1.jpg',
-              ),
-              BannerWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/banner_1.jpg',
-              ),
-            ],
+          child: PageView.builder(
+            itemCount: banners.length,
+            itemBuilder: (context, index) {
+              return BannerWidget(imageUrl: banners[index].image);
+            },
           ),
         ),
         Positioned(
@@ -102,45 +91,16 @@ class ProductList extends StatelessWidget {
     return SizedBox(
       height: 340,
       width: MediaQuery.of(context).size.width,
-      child: ListView(
+      child: ListView.builder(
+        itemCount: products.length,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        children: [
-          Row(
-            children: [
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-              ProductWidget(
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
-                layoutType: LayoutType.horizontalList,
-              ),
-            ],
-          ),
-        ],
+        itemBuilder: (BuildContext context, int index) {
+          return ProductWidget(
+            products: products[index],
+            layoutType: LayoutType.horizontalList,
+          );
+        },
       ),
     );
   }
@@ -180,11 +140,11 @@ class TitleProductWidget extends StatelessWidget {
 
 /// --------------------------------------------------------------------------
 class ProductWidget extends StatefulWidget {
-  final String imageUrl;
+  final Product products;
   final LayoutType layoutType;
   const ProductWidget({
     super.key,
-    required this.imageUrl,
+    required this.products,
     required this.layoutType,
   });
 
@@ -225,7 +185,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl: widget.imageUrl,
+                        imageUrl: widget.products.image,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -260,7 +220,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
               const SizedBox(height: 8),
               Text(
-                'کفش ورزشی دویدن مخصوص نایکی ایرمکس',
+                widget.products.title,
                 style: TextStyle(
                   fontSize:
                       widget.layoutType == LayoutType.grid ||
@@ -272,7 +232,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
               SizedBox(height: 10),
               Text(
-                '3,500,000 تومان',
+                '${widget.products.price} تومان',
                 style: TextStyle(
                   fontSize:
                       widget.layoutType == LayoutType.grid ||
@@ -284,7 +244,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 ),
               ),
               Text(
-                '2,800,000 تومان',
+                '${widget.products.previousPrice} تومان',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ],

@@ -12,7 +12,7 @@ class ProductRemoteDataSourceImpl implements IProductDataSource {
   ProductRemoteDataSourceImpl({required this.httpClient});
   @override
   Future<List<Product>> getProducts(int sortParam) async {
-    var response = await httpClient.get('/product/list?$sortParam');
+    var response = await httpClient.get('/product/list?sort=$sortParam');
     List<Product> productsTmp = [];
     for (var element in response.data) {
       productsTmp.add(Product.fromJson(element));

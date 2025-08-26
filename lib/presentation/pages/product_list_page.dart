@@ -37,49 +37,49 @@ class _ProductListPageState extends State<ProductListPage> {
             crossAxisSpacing: 8,
             childAspectRatio: layoutType == LayoutType.grid ? 0.65 : 0.8,
             mainAxisSpacing: layoutType == LayoutType.grid ? 0.0 : 8.0,
-
+            
             children: [
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
 
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
-              ProductWidget(
-                layoutType: layoutType,
-                imageUrl:
-                    'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
-              ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
+              // ProductWidget(
+              //   layoutType: layoutType,
+              //   products:
+              //       'https://s3.ir-thr-at1.arvanstorage.com/nike/air-zoom-pegasus-37-running-shoe-W3gMz9%20(1).jpg',
+              // ),
             ],
           ),
         ),
