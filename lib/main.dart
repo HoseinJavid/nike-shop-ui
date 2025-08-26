@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice/core/theme/theme.dart';
+import 'package:practice/injection.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
@@ -19,21 +20,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: LightTheme().getLightTheme(const Locale('fa')),
-      debugShowCheckedModeBanner: false,
-      routerConfig: routers,
-      // home: Directionality(
-      // textDirection: TextDirection.rtl,
-      // child: const ProductListPage(),
-      // child: HomePage(),
-      // child: ProductDetailPage(),
-      // child: CartPage(),
-      // child: ProfilePage(),
-      // child: PaymentResultPage(),
-      // child: PaymentInfoPage(),
-      // child: AuthPage(),
-      // ),
+    return MyBlocProvider(
+      child: MaterialApp.router(
+        theme: LightTheme().getLightTheme(const Locale('fa')),
+        debugShowCheckedModeBanner: false,
+        routerConfig: routers,
+        // home: Directionality(
+        // textDirection: TextDirection.rtl,
+        // child: const ProductListPage(),
+        // child: HomePage(),
+        // child: ProductDetailPage(),
+        // child: CartPage(),
+        // child: ProfilePage(),
+        // child: PaymentResultPage(),
+        // child: PaymentInfoPage(),
+        // child: AuthPage(),
+        // ),
+      ),
     );
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:practice/core/constants/constant.dart';
+import 'package:practice/data/model/product.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:practice/data/model/banner.dart' as my_banner;
 
 /// --------------------------------------------------------------------------
 class McwTextFild extends StatelessWidget {
@@ -41,7 +43,8 @@ class McwTextFild extends StatelessWidget {
 
 /// --------------------------------------------------------------------------
 class BannerList extends StatelessWidget {
-  const BannerList({super.key});
+  final List<my_banner.Banner> banners;
+  const BannerList({super.key, required this.banners});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +94,8 @@ class BannerList extends StatelessWidget {
 
 /// --------------------------------------------------------------------------
 class ProductList extends StatelessWidget {
-  const ProductList({super.key});
+  final List<Product> products;
+  const ProductList({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {

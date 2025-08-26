@@ -15,10 +15,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     : super(HomeInitial()) {
     on<HomeEvent>((event, emit) async {
       emit(HomeLoading());
-      if (event is HomeLoadProducts) {
-        var products = await productRepository.getProducts(event.sort);
+      if (event is HomeLoadStart) {
         var banners = await bannerRepository.getBanners();
-        emit(HomeLoaded(products: products, banners: banners));
+        var newestProducts = await productRepository.getProducts(0);
+        var expensiveProducts = await productRepository.getProducts(1);
+        var cheapProducts = await productRepository.getProducts(2);
+        var popularProducts = await productRepository.getProducts(3);
+        emit(
+          HomeLoaded(
+            newestProducts: newestProducts,
+            banners: banners,
+            expensiveProducts: expensiveProducts,
+            cheapProducts: cheapProducts,
+            popularProducts: popularProducts,
+          ),
+        );
       }
     });
   }

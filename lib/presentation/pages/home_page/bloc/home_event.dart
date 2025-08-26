@@ -7,24 +7,9 @@ sealed class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class HomeLoadProducts extends HomeEvent {
-  final int sort;
-
-  const HomeLoadProducts(this.sort);
+class HomeLoadStart extends HomeEvent {
+  const HomeLoadStart();
 
   @override
-  List<Object?> get props => [sort];
+  List<Object?> get props => [];
 }
-
-// class HomeSearchProducts extends HomeEvent {
-//   final String searchTerm;
-
-//   const HomeSearchProducts(this.searchTerm);
-
-//   @override
-//   List<Object?> get props => [searchTerm];
-// }
-
-// class HomeRefresh extends HomeEvent {
-//   const HomeRefresh();
-// }

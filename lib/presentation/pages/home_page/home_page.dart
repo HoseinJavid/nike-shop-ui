@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:practice/gen/assets.gen.dart';
+import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<HomeBloc>().add(HomeLoadStart());
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -47,11 +54,51 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                BannerList(),
-                TitleProductWidget(title: 'محصولات جدید'),
-                ProductList(),
-                TitleProductWidget(title: 'محصولات پرفروش'),
-                ProductList(),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeLoaded) {
+                      return BannerList(banners: state.banners);
+                    } else if (state is HomeLoading) {
+                      return SizedBox(
+                        height: 250,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+
+                TitleProductWidget(title: 'محبوب ترین محصولات'),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeLoaded) {
+                      return ProductList(products: state.popularProducts);
+                    } else if (state is HomeLoading) {
+                      return SizedBox(
+                        height: 340,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                TitleProductWidget(title: 'جدیدترین محصولات'),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeLoaded) {
+                      return ProductList(products: state.newestProducts);
+                    } else if (state is HomeLoading) {
+                      return SizedBox(
+                        height: 340,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
               ],
             ),
           ),
