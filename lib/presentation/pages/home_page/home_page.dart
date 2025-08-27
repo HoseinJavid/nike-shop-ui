@@ -62,7 +62,15 @@ class _HomePageState extends State<HomePage> {
                       return SizedBox(
                         height: 250,
                         width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        )),
+                      );
+                    } else if (state is HomeError) {
+                      return McwShowError(
+                        state: state,
+                        heightContainer: 250,
+                        widthContainer: MediaQuery.of(context).size.width,
                       );
                     }
                     return Container();
@@ -78,7 +86,15 @@ class _HomePageState extends State<HomePage> {
                       return SizedBox(
                         height: 340,
                         width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        )),
+                      );
+                    } else if (state is HomeError) {
+                      return McwShowError(
+                        state: state,
+                        heightContainer: 340,
+                        widthContainer: MediaQuery.of(context).size.width,
                       );
                     }
                     return Container();
@@ -93,7 +109,15 @@ class _HomePageState extends State<HomePage> {
                       return SizedBox(
                         height: 340,
                         width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        )),
+                      );
+                    } else if (state is HomeError) {
+                      return McwShowError(
+                        state: state,
+                        heightContainer: 340,
+                        widthContainer: MediaQuery.of(context).size.width,
                       );
                     }
                     return Container();
@@ -102,6 +126,58 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class McwShowError extends StatelessWidget {
+  final HomeError state;
+  final double heightContainer;
+  final double widthContainer;
+
+  const McwShowError({
+    super.key,
+    required this.state,
+    required this.heightContainer,
+    required this.widthContainer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: heightContainer,
+      width: widthContainer,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              CupertinoIcons.wifi_exclamationmark,
+              size: 50,
+              color: Colors.grey,
+            ),
+            SizedBox(height: 10),
+            Text(
+              state.message,
+              style: TextStyle(fontSize: 18, color: Colors.grey),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                context.read<HomeBloc>().add(HomeLoadStart());
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text('تلاش مجدد'),
+            ),
+          ],
         ),
       ),
     );
