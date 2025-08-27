@@ -20,9 +20,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (event is HomeLoadStart) {
           var banners = await bannerRepository.getBanners();
           var newestProducts = await productRepository.getProducts(0);
-          var expensiveProducts = await productRepository.getProducts(1);
-          var cheapProducts = await productRepository.getProducts(2);
-          var popularProducts = await productRepository.getProducts(3);
+          var popularProducts = await productRepository.getProducts(1);
+          var expensiveProducts = await productRepository.getProducts(2);
+          var cheapProducts = await productRepository.getProducts(3);
           emit(
             HomeLoaded(
               newestProducts: newestProducts,

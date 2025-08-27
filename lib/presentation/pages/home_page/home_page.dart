@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:practice/core/constants/constant.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     context.read<HomeBloc>().add(HomeLoadStart());
-
     super.initState();
   }
 
@@ -26,106 +26,88 @@ class _HomePageState extends State<HomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      Assets.img.nikeLogoDark.path,
-                      width: 80,
-                      height: 80,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8, left: 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'جستجوی محصولات',
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Theme.of(context).primaryColor,
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is HomeLoading) {
+              return SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ShimmerLogo(),
+                      const SizedBox(height: 10),
+                      ShimmerSearchBar(),
+                      const SizedBox(height: 10),
+                      ShimmerBannerList(),
+                      TitleProductWidget(
+                        title: 'پرفروش ترین محصولات',
+                        sortType: SortType.bestSelling,
                       ),
-                    ),
+                      ShimmerProductList(),
+                      TitleProductWidget(
+                        title: 'جدیدترین محصولات',
+                        sortType: SortType.newest,
+                      ),
+                      ShimmerProductList(),
+                    ],
                   ),
                 ),
-                SizedBox(height: 10),
-                BlocBuilder<HomeBloc, HomeState>(
-                  builder: (context, state) {
-                    if (state is HomeLoaded) {
-                      return BannerList(banners: state.banners);
-                    } else if (state is HomeLoading) {
-                      return SizedBox(
-                        height: 250,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor,
-                        )),
-                      );
-                    } else if (state is HomeError) {
-                      return McwShowError(
-                        state: state,
-                        heightContainer: 250,
-                        widthContainer: MediaQuery.of(context).size.width,
-                      );
-                    }
-                    return Container();
-                  },
+              );
+            } else if (state is HomeError) {
+              return Center(
+                child: McwShowError(
+                  state: state,
+                  heightContainer: 250,
+                  widthContainer: MediaQuery.of(context).size.width,
                 ),
-
-                TitleProductWidget(title: 'محبوب ترین محصولات'),
-                BlocBuilder<HomeBloc, HomeState>(
-                  builder: (context, state) {
-                    if (state is HomeLoaded) {
-                      return ProductList(products: state.popularProducts);
-                    } else if (state is HomeLoading) {
-                      return SizedBox(
-                        height: 340,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor,
-                        )),
-                      );
-                    } else if (state is HomeError) {
-                      return McwShowError(
-                        state: state,
-                        heightContainer: 340,
-                        widthContainer: MediaQuery.of(context).size.width,
-                      );
-                    }
-                    return Container();
-                  },
+              );
+            } else if (state is HomeLoaded) {
+              return SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            Assets.img.nikeLogoDark.path,
+                            width: 80,
+                            height: 80,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8, left: 8),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'جستجوی محصولات',
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      BannerList(banners: state.banners),
+                      TitleProductWidget(
+                        title: 'محبوب ترین محصولات',
+                        sortType: SortType.popular,
+                      ),
+                      ProductList(products: state.popularProducts),
+                      TitleProductWidget(
+                        title: 'جدیدترین محصولات',
+                        sortType: SortType.newest,
+                      ),
+                      ProductList(products: state.newestProducts),
+                    ],
+                  ),
                 ),
-                TitleProductWidget(title: 'جدیدترین محصولات'),
-                BlocBuilder<HomeBloc, HomeState>(
-                  builder: (context, state) {
-                    if (state is HomeLoaded) {
-                      return ProductList(products: state.newestProducts);
-                    } else if (state is HomeLoading) {
-                      return SizedBox(
-                        height: 340,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor,
-                        )),
-                      );
-                    } else if (state is HomeError) {
-                      return McwShowError(
-                        state: state,
-                        heightContainer: 340,
-                        widthContainer: MediaQuery.of(context).size.width,
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-              ],
-            ),
-          ),
+              );
+            }
+            // Initial or unknown state
+            return Container();
+          },
         ),
       ),
     );
@@ -178,6 +160,111 @@ class McwShowError extends StatelessWidget {
               child: Text('تلاش مجدد'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// Shimmer placeholders
+
+class ShimmerLogo extends StatelessWidget {
+  const ShimmerLogo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ShimmerSearchBar extends StatelessWidget {
+  const ShimmerSearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8, left: 8),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerBannerList extends StatelessWidget {
+  const ShimmerBannerList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 250,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        separatorBuilder: (context, index) => SizedBox(width: 8),
+        itemBuilder: (context, index) => Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 120,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerProductList extends StatelessWidget {
+  const ShimmerProductList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 324,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 4,
+        separatorBuilder: (context, index) => SizedBox(width: 8),
+        itemBuilder: (context, index) => Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 324,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
         ),
       ),
     );

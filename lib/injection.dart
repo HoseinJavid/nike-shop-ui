@@ -7,6 +7,7 @@ import 'package:practice/data/datasources/product_data_source.dart';
 import 'package:practice/data/repository/banner_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 
 //service locator
 class MyBlocProvider extends StatelessWidget {
@@ -29,6 +30,7 @@ class MyBlocProvider extends StatelessWidget {
             ),
           ),
         ),
+        BlocProvider(create: (context) => ProductListBloc()),
       ],
       child: child,
     );

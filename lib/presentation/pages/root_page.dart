@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:practice/core/constants/constant.dart';
+import 'package:practice/data/model/product.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
 import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/pages/paymentResult_page.dart';
 import 'package:practice/presentation/pages/product_detail_page.dart';
-import 'package:practice/presentation/pages/product_list_page.dart';
+import 'package:practice/presentation/pages/product_list_page/product_list_page.dart';
 import 'package:practice/presentation/pages/profile_page.dart';
 
 GoRouter routers = GoRouter(
@@ -32,7 +34,9 @@ GoRouter routers = GoRouter(
         ),
         GoRoute(
           path: '/productList',
-          builder: (context, state) => const ProductListPage(),
+          builder: (context, state) {
+            return ProductListPage();
+          },
         ),
         GoRoute(
           path: '/profile',

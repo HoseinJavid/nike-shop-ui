@@ -2,8 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice/core/constants/constant.dart';
 import 'package:practice/data/model/product.dart';
+import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:practice/data/model/banner.dart' as my_banner;
 
@@ -109,7 +113,12 @@ class ProductList extends StatelessWidget {
 /// --------------------------------------------------------------------------
 class TitleProductWidget extends StatelessWidget {
   final String title;
-  const TitleProductWidget({super.key, required this.title});
+  final SortType sortType;
+  const TitleProductWidget({
+    super.key,
+    required this.title,
+    required this.sortType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +132,12 @@ class TitleProductWidget extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push('/productList');
+              context.read<ProductListBloc>().add(
+                ChangeProductListSortTypeEvent(sortType: sortType),
+              );
+            },
             child: Text(
               'مشاهده همه',
               style: TextStyle(
@@ -312,7 +326,9 @@ class _McwAppBarProductListState extends State<McwAppBarProductList> {
                     size: 30.0,
                     color: Colors.black,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                 ),
                 Text(
                   'کفش های ورزشی',
@@ -347,7 +363,15 @@ class _McwAppBarProductListState extends State<McwAppBarProductList> {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return ContainerWidgetButtomSheet();
+                        return ContainerWidgetButtomSheet(
+                          onChangedSortType: (value) {
+                            setState(() {});
+                          },
+                          selectedSortType: context
+                              .read<ProductListBloc>()
+                              .state
+                              .sortType,
+                        );
                       },
                     );
                   },
@@ -365,7 +389,19 @@ class _McwAppBarProductListState extends State<McwAppBarProductList> {
                     ),
 
                     Text(
-                      'پرفروش ترین',
+                      context.read<ProductListBloc>().state.sortType ==
+                              SortType.cheapest
+                          ? 'ارزان ترین'
+                          : context.read<ProductListBloc>().state.sortType ==
+                                SortType.mostExpensive
+                          ? 'گران ترین'
+                          : context.read<ProductListBloc>().state.sortType ==
+                                SortType.popular
+                          ? 'محبوب ترین'
+                          : context.read<ProductListBloc>().state.sortType ==
+                                SortType.newest
+                          ? 'جدیدترین'
+                          : 'پیش فرض',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -405,7 +441,14 @@ class _McwAppBarProductListState extends State<McwAppBarProductList> {
 
 /// --------------------------------------------------------------------------
 class ContainerWidgetButtomSheet extends StatefulWidget {
-  const ContainerWidgetButtomSheet({super.key});
+  final ValueChanged<SortType> onChangedSortType;
+  final SortType selectedSortType;
+
+  const ContainerWidgetButtomSheet({
+    super.key,
+    required this.onChangedSortType,
+    required this.selectedSortType,
+  });
 
   @override
   State<ContainerWidgetButtomSheet> createState() =>
@@ -414,7 +457,14 @@ class ContainerWidgetButtomSheet extends StatefulWidget {
 
 class _ContainerWidgetButtomSheetState
     extends State<ContainerWidgetButtomSheet> {
-  SortType selectedSortType = SortType.newest;
+  late SortType selectedSortType;
+
+  @override
+  void initState() {
+    selectedSortType = widget.selectedSortType;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -443,18 +493,26 @@ class _ContainerWidgetButtomSheetState
             selectedSortType: selectedSortType,
             onChangedSortType: (SortType value) {
               setState(() {
+                widget.onChangedSortType(SortType.newest);
                 selectedSortType = value;
               });
+              context.read<ProductListBloc>().add(
+                ChangeProductListSortTypeEvent(sortType: SortType.newest),
+              );
             },
           ),
           SortWidget(
-            title: 'پرفروش ترین',
-            sortType: SortType.bestSelling,
+            title: 'محبوب ترین',
+            sortType: SortType.popular,
             selectedSortType: selectedSortType,
             onChangedSortType: (SortType value) {
               setState(() {
+                widget.onChangedSortType(SortType.popular);
                 selectedSortType = value;
               });
+              context.read<ProductListBloc>().add(
+                ChangeProductListSortTypeEvent(sortType: SortType.popular),
+              );
             },
           ),
           SortWidget(
@@ -463,8 +521,12 @@ class _ContainerWidgetButtomSheetState
             selectedSortType: selectedSortType,
             onChangedSortType: (SortType value) {
               setState(() {
+                widget.onChangedSortType(SortType.cheapest);
                 selectedSortType = value;
               });
+              context.read<ProductListBloc>().add(
+                ChangeProductListSortTypeEvent(sortType: SortType.cheapest),
+              );
             },
           ),
           SortWidget(
@@ -473,8 +535,14 @@ class _ContainerWidgetButtomSheetState
             selectedSortType: selectedSortType,
             onChangedSortType: (SortType value) {
               setState(() {
+                widget.onChangedSortType(SortType.mostExpensive);
                 selectedSortType = value;
               });
+              context.read<ProductListBloc>().add(
+                ChangeProductListSortTypeEvent(
+                  sortType: SortType.mostExpensive,
+                ),
+              );
             },
           ),
           SizedBox(height: 16),
