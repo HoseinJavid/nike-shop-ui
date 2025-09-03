@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:practice/core/constants/constant.dart';
 import 'package:practice/data/model/product.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
+import 'package:practice/presentation/pages/auth_page/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page.dart';
 import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/pages/paymentResult_page.dart';
@@ -12,7 +13,8 @@ import 'package:practice/presentation/pages/product_list_page/product_list_page.
 import 'package:practice/presentation/pages/profile_page.dart';
 
 GoRouter routers = GoRouter(
-  initialLocation: '/',
+  // initialLocation: '/',
+  initialLocation: '/auth',
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -45,6 +47,7 @@ GoRouter routers = GoRouter(
         GoRoute(path: '/carPage', builder: (context, state) => CartPage()),
       ],
     ),
+    GoRoute(path: '/auth', builder: (context, state) => const AuthPage()),
   ],
 );
 

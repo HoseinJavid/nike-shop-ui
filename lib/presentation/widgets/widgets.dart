@@ -16,10 +16,12 @@ class McwTextFild extends StatelessWidget {
   /// Custom Text Field for email input
   final String hintText;
   final bool obsecureText;
+  final TextEditingController controller;
   const McwTextFild({
     super.key,
     required this.hintText,
     this.obsecureText = false,
+    required this.controller,
   });
 
   @override
@@ -27,6 +29,7 @@ class McwTextFild extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width / 1.2,
       child: TextField(
+        controller: controller,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
