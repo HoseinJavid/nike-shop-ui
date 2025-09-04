@@ -3,6 +3,7 @@ import 'package:practice/data/model/authInfo.dart';
 
 abstract class IauthRepository extends IauthDataSource {
   Future<void> signOut();
+  Future<bool> isLogin();
 }
 
 class AuthRepositoryImpl extends IauthRepository {
@@ -31,12 +32,14 @@ class AuthRepositoryImpl extends IauthRepository {
   }
 
   @override
-  Future<Authinfo> signUp(
-    String username,
-    String password,
-  ) async {
+  Future<Authinfo> signUp(String username, String password) async {
     var authInfo = await remote.signUp(username, password);
     local.saveAuthInfo(authInfo);
     return authInfo;
+  }
+
+  @override
+  Future<bool> isLogin() {
+    return local.getAuthInfo().then((value) => value != null);
   }
 }

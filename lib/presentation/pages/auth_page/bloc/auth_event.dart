@@ -30,4 +30,4 @@ final class StartLoginUser extends AuthEvent {
   List<Object> get props => [username, password];
 }
 
-enum AuthMode { login, signUp }
+enum AuthMode { login, signUp,logout }

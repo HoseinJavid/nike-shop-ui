@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice/core/constants/constant.dart';
-import 'package:practice/presentation/pages/cart_page.dart';
+import 'package:practice/presentation/pages/cart_page/cart_page.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
 class PaymentInfoPage extends StatelessWidget {

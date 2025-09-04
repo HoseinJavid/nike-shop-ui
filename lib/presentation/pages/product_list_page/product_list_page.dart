@@ -58,7 +58,7 @@ class _ProductListPageState extends State<ProductListPage> {
                             ? 0.0
                             : 8.0,
                         childAspectRatio: layoutType == LayoutType.grid
-                            ? 0.65
+                            ? 0.55
                             : 0.8,
                       ),
                       itemCount: products.length,
@@ -88,7 +88,7 @@ class _ProductListPageState extends State<ProductListPage> {
                             ? 0.0
                             : 8.0,
                         childAspectRatio: layoutType == LayoutType.grid
-                            ? 0.65
+                            ? 0.55
                             : 0.8,
                       ),
                       itemCount: products.length,
@@ -118,7 +118,7 @@ class _ProductListPageState extends State<ProductListPage> {
                             ? 0.0
                             : 8.0,
                         childAspectRatio: layoutType == LayoutType.grid
-                            ? 0.65
+                            ? 0.55
                             : 0.8,
                       ),
                       itemCount: products.length,
@@ -148,7 +148,7 @@ class _ProductListPageState extends State<ProductListPage> {
                             ? 0.0
                             : 8.0,
                         childAspectRatio: layoutType == LayoutType.grid
-                            ? 0.65
+                            ? 0.55
                             : 0.8,
                       ),
                       itemCount: products.length,

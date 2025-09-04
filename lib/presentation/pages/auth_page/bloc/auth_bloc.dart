@@ -23,6 +23,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             authmode = AuthMode.signUp;
             emit(ChangedAuthMode(authmode));
             break;
+          case AuthMode.logout:
+            // TODO: Handle this case.
+            throw UnimplementedError();
         }
       } else if (event is StartLoginUser) {
         try {

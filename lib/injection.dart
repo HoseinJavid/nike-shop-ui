@@ -10,8 +10,10 @@ import 'package:practice/data/repository/auth_repository.dart';
 import 'package:practice/data/repository/banner_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
+import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
 //service locator
 class MyBlocProvider extends StatelessWidget {
@@ -34,10 +36,25 @@ class MyBlocProvider extends StatelessWidget {
             ),
           ),
         ),
-        BlocProvider(
-          create: (context) => ProductListBloc()),
+        BlocProvider(create: (context) => ProductListBloc()),
         BlocProvider(
           create: (context) => AuthBloc(
+            AuthRepositoryImpl(
+              remote: AuthRemoteDataSourceImpl(httpClient: httpClient),
+              local: AuthLocalDataSourceImpl(sharedPreferences: shprefs),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => CartBloc(
+            AuthRepositoryImpl(
+              remote: AuthRemoteDataSourceImpl(httpClient: httpClient),
+              local: AuthLocalDataSourceImpl(sharedPreferences: shprefs),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => ProfileBloc(
             AuthRepositoryImpl(
               remote: AuthRemoteDataSourceImpl(httpClient: httpClient),
               local: AuthLocalDataSourceImpl(sharedPreferences: shprefs),

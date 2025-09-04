@@ -11,6 +11,7 @@
 /// based on the device's screen size.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice/core/theme/theme.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
@@ -34,7 +35,7 @@ class _AuthPageState extends State<AuthPage> {
       textDirection: TextDirection.rtl,
       child: BlocListener<AuthBloc, AuthState>(
         listenWhen: (previous, current) => true,
-        listener: (context, state) {
+        listener: (context, state)async {
           if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -48,8 +49,11 @@ class _AuthPageState extends State<AuthPage> {
               SnackBar(
                 content: Text('ورود با موفقیت انجام شد'),
                 backgroundColor: Colors.blue,
+                duration: Duration(milliseconds: 500),
               ),
             );
+            await Future.delayed(Duration(milliseconds: 1000));
+            context.go('/');
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
