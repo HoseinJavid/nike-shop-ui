@@ -1,5 +1,5 @@
 import 'package:practice/data/datasources/auth_data_source.dart';
-import 'package:practice/data/model/authInfo.dart';
+import 'package:practice/data/model/auth_info.dart';
 
 abstract class IauthRepository extends IauthDataSource {
   Future<void> signOut();

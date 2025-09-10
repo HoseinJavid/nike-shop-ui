@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:practice/core/network/validation.dart';
-import 'package:practice/data/model/authInfo.dart';
+import 'package:practice/data/model/auth_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IauthDataSource {

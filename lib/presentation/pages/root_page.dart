@@ -14,7 +14,7 @@ import 'package:practice/presentation/pages/profile_page/profile_page.dart';
 final GoRouter routers = GoRouter(
   initialLocation: '/',
   routes: [
-    StatefulShellRoute.indexedStack(
+    StatefulShellRoute(
       builder: (context, state, navigationShell) {
         return RootPage(navigationShell: navigationShell);
       },
@@ -23,7 +23,7 @@ final GoRouter routers = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) => const ProfilePage(),
+              builder: (context, state) =>  ProfilePage(key: UniqueKey(),),
             ),
           ],
         ),
@@ -58,7 +58,9 @@ final GoRouter routers = GoRouter(
             ),
           ],
         ),
-      ],
+      ], navigatorContainerBuilder: (BuildContext context, StatefulNavigationShell navigationShell, List<Widget> children) { 
+            return children[navigationShell.currentIndex];
+       },
     ),
 
     GoRoute(path: '/auth', builder: (context, state) => const AuthPage()),
@@ -85,6 +87,10 @@ class RootPage extends StatelessWidget {
             index,
             initialLocation: index == navigationShell.currentIndex,
           );
+
+          if (index == 0) {
+            navigationShell.goBranch(index, initialLocation: true);
+          }
         },
         items: const [
           BottomNavigationBarItem(
@@ -104,3 +110,105 @@ class RootPage extends StatelessWidget {
     );
   }
 }
+
+//-------------------------------------------------------------------------------
+// GoRouter routers = GoRouter(
+//   initialLocation: '/',
+//   // initialLocation: '/auth',
+//   routes: [
+//     ShellRoute(
+//       redirect: (context, state) {
+//         return null;
+//       },
+//       builder: (context, state, child) {
+//         return RootPage(child: child);
+//       },
+//       routes: [
+//         GoRoute(path: '/', builder: (context, state) => const HomePage()),
+//         GoRoute(
+//           path: '/paymentInfo',
+//           builder: (context, state) => const PaymentInfoPage(),
+//         ),
+//         GoRoute(
+//           path: '/paymentResult',
+//           builder: (context, state) => const PaymentResultPage(),
+//         ),
+//         GoRoute(
+//           path: '/productDetail',
+//           builder: (context, state) => const ProductDetailPage(),
+//         ),
+//         GoRoute(
+//           path: '/productList',
+//           builder: (context, state) {
+//             return ProductListPage();
+//           },
+//         ),
+//         GoRoute(
+//           path: '/profile',
+//           builder: (context, state) => const ProfilePage(),
+//         ),
+//         GoRoute(path: '/carPage', builder: (context, state) => CartPage()),
+//       ],
+//     ),
+//     GoRoute(path: '/auth', builder: (context, state) => const AuthPage()),
+//   ],
+// );
+
+// class RootPage extends StatefulWidget {
+//   final Widget child;
+//   const RootPage({super.key, required this.child});
+
+//   @override
+//   State<RootPage> createState() => _RootPageState();
+// }
+
+// class _RootPageState extends State<RootPage> {
+//   int correntNavIndex = 2;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: widget.child,
+//       bottomNavigationBar: BottomNavigationBar(
+//         selectedItemColor: Theme.of(context).primaryColor,
+//         showUnselectedLabels: true,
+//         backgroundColor: Colors.white,
+//         showSelectedLabels: true,
+//         currentIndex: correntNavIndex,
+//         onTap: (value) {
+//           setState(() {
+//             correntNavIndex = value;
+//           });
+//           switch (value) {
+//             case 0:
+//               // navigate...
+//               context.go('/profile');
+//               break;
+//             case 1:
+//               // navigate...
+//               context.go('/carPage');
+//               break;
+//             case 2:
+//               // navigate...
+//               context.go('/');
+//               break;
+//             default:
+//           }
+//         },
+//         items: [
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.person_outline_outlined, size: 28),
+//             label: 'اطلاعات کاربری',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.shopping_bag_outlined, size: 28),
+//             label: 'سبدخرید',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.home_outlined, size: 28),
+//             label: 'خانه',
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
