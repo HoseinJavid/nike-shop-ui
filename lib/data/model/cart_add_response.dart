@@ -13,7 +13,7 @@ class CartAddResponse {
     return CartAddResponse(
       count: json['count'],
       productId: json['product_id'],
-      cartItemId: json['cart_item_id'],
+      cartItemId: json['id'],
     );
   }
 

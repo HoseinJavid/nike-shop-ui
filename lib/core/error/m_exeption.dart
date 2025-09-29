@@ -23,3 +23,7 @@ class ValidationException extends AppException {
 class UnauthorizedException extends AppException {
   UnauthorizedException([super.message = "Unauthorized user"]);
 }
+
+class NotFoundException extends AppException {
+  NotFoundException([super.message = "not found"]);
+}

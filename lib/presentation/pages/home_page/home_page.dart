@@ -38,15 +38,17 @@ class _HomePageState extends State<HomePage> {
                       ShimmerSearchBar(),
                       const SizedBox(height: 10),
                       ShimmerBannerList(),
-                      TitleProductWidget(
-                        title: 'پرفروش ترین محصولات',
-                        sortType: SortType.bestSelling,
-                      ),
+                      // TitleProductWidget(
+                      //   title: 'پرفروش ترین محصولات',
+                      //   sortType: SortType.bestSelling,
+                      // ),
+                      ShimmerCategoryButtoms(),
                       ShimmerProductList(),
-                      TitleProductWidget(
-                        title: 'جدیدترین محصولات',
-                        sortType: SortType.newest,
-                      ),
+                      // TitleProductWidget(
+                      //   title: 'جدیدترین محصولات',
+                      //   sortType: SortType.newest,
+                      // ),
+                      ShimmerCategoryButtoms(),
                       ShimmerProductList(),
                     ],
                   ),
@@ -265,6 +267,43 @@ class ShimmerProductList extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerCategoryButtoms extends StatelessWidget {
+  const ShimmerCategoryButtoms({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 13, bottom: 13,right: 8,left: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 161,
+              height: 23,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            Container(
+              width: 89,
+              height: 23,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ],
         ),
       ),
     );

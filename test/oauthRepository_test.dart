@@ -6,14 +6,13 @@ import 'package:practice/data/repository/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  late AuthRepositoryImpl authRepositoryImpl;
+  late IauthRepository authRepositoryImpl;
   late IauthLocalDataSource local;
   late IauthDataSource remote;
   late Dio httpClient;
   late SharedPreferences sharedPreferences;
 
   setUp(() async {
-    // استفاده از سرور واقعی
     httpClient = Dio(
       BaseOptions(
         baseUrl: 'http://localhost:8085/api/v1',

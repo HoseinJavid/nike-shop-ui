@@ -24,10 +24,11 @@ class CartList {
 
   factory CartList.fromJson(Map<String, dynamic> json) {
     var cartItemsFromJson = json['cart_items'] as List;
-    List<CartItem> cartItemList = cartItemsFromJson
-        .map((i) => CartItem.fromJson(i))
-        .toList();
+    List<CartItem> cartItemList = [];
 
+    for (var cartItem in cartItemsFromJson) {
+      cartItemList.add(CartItem.fromJson(cartItem));
+    }
     return CartList(
       cartItems: cartItemList,
       totalPrice: json['total_price'],

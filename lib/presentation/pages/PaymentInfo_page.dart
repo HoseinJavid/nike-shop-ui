@@ -55,7 +55,7 @@ class PaymentInfoPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 16),
-                      CartInfoWidget(padding: EdgeInsetsGeometry.all(16)),
+                      // CartInfoWidget(padding: EdgeInsetsGeometry.all(16)),
                       Padding(
                         padding: const EdgeInsets.only(right: 16, left: 16),
                         child: Divider(color: Colors.grey.shade300, thickness: 1),

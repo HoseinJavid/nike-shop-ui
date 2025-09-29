@@ -12,6 +12,8 @@ mixin HttpResponseValidation {
       throw ServerException();
     } else if (response.statusCode == 401) {
       throw UnauthorizedException();
+    } else if (response.statusCode == 404) {
+      throw NotFoundException();
     } else if (response.statusCode != 200) {
       throw AppException();
     }

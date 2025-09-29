@@ -1,9 +1,15 @@
 import 'package:practice/data/datasources/auth_data_source.dart';
 import 'package:practice/data/model/auth_info.dart';
 
-abstract class IauthRepository extends IauthDataSource {
+abstract class IauthRepository {
   Future<void> signOut();
   Future<bool> isLogin();
+
+  Future<Authinfo> login(String username, String password);
+  Future<Authinfo> signUp(String username, String password);
+
+  Future<Authinfo> refreshToken(String refreshToken);
+  Future<Authinfo?> getAuthInfo();
 }
 
 class AuthRepositoryImpl extends IauthRepository {
@@ -41,5 +47,10 @@ class AuthRepositoryImpl extends IauthRepository {
   @override
   Future<bool> isLogin() {
     return local.getAuthInfo().then((value) => value != null);
+  }
+
+  @override
+  Future<Authinfo?> getAuthInfo() {
+    return local.getAuthInfo();
   }
 }

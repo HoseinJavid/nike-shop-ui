@@ -9,14 +9,26 @@ sealed class CartState extends Equatable {
 
 final class CartInitial extends CartState {}
 
-final class CartLoading extends CartState {}
-
-final class CartLoaded extends CartState {
-  final List<Product> products;
-  const CartLoaded(this.products);
+final class CartLoading extends CartState {
+  final CartLoadingType type;
+  final int? cartItemId;
+  final CartLoaded? previousState;
+  const CartLoading({
+    this.type = CartLoadingType.defult,
+    this.cartItemId,
+    this.previousState,
+  });
 
   @override
-  List<Object> get props => [products];
+  List<Object> get props => [type];
+}
+
+final class CartLoaded extends CartState {
+  final CartList cartList;
+  const CartLoaded(this.cartList);
+
+  @override
+  List<Object> get props => [cartList];
 }
 
 final class CartError extends CartState {
@@ -30,10 +42,12 @@ final class CartError extends CartState {
 
 final class CartEmpty extends CartState {}
 
-final class CartItemAdded extends CartState {}
+final class CartItemCountAdded extends CartState {}
 
-final class CartItemRemoved extends CartState {}
+final class CartItemCountRemoved extends CartState {}
 
 final class CartItemUpdated extends CartState {}
 
 enum CartErrorType { notLoggedIn, networkError, unknown }
+
+enum CartLoadingType { defult, itemCountChange }

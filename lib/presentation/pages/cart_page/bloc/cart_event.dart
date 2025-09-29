@@ -13,3 +13,27 @@ class LoadCart extends CartEvent {
   @override
   List<Object> get props => [];
 }
+
+class ChangeCartItemCount extends CartEvent {
+  final int cartItemId;
+  final int count;
+  const ChangeCartItemCount(this.cartItemId, this.count);
+
+  @override
+  List<Object> get props => [cartItemId, count];
+}
+
+class RemoveCartItem extends CartEvent {
+  final int cartItemId;
+  const RemoveCartItem(this.cartItemId);
+
+  @override
+  List<Object> get props => [cartItemId];
+}
+
+class RefreshCart extends CartEvent {
+  const RefreshCart();
+
+  @override
+  List<Object> get props => [];
+}
