@@ -27,3 +27,7 @@ class UnauthorizedException extends AppException {
 class NotFoundException extends AppException {
   NotFoundException([super.message = "not found"]);
 }
+
+abstract class AppError {
+   String get message;
+}

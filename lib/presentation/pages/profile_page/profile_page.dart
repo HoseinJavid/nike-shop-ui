@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -122,8 +123,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   if (state.authMode == AuthMode.login) {
                                     showLogoutDialog(context);
                                   } else {
-                                    // context.read<ProfileBloc>().add(
-                                    //   LoginRequested(),
+                                    // context.read<CartBloc>().add(
+                                    //   LoadCart(),
                                     // );
                                     context.push('/auth');
                                   }
@@ -206,5 +207,7 @@ Future<void> showLogoutDialog(BuildContext context) async {
 
   if (shouldLogout == true) {
     context.read<ProfileBloc>().add(LogoutRequested());
+    context.read<CartBloc>().add(LoadCart());
+    context.read<ProfileBloc>().add(LoadProfile());
   }
 }

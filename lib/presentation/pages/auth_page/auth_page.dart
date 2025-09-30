@@ -15,6 +15,8 @@ import 'package:go_router/go_router.dart';
 import 'package:practice/core/theme/theme.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
 class AuthPage extends StatefulWidget {
@@ -54,6 +56,8 @@ class _AuthPageState extends State<AuthPage> {
             );
             await Future.delayed(Duration(milliseconds: 1000));
             context.go('/');
+            context.read<ProfileBloc>().add(LoadProfile());
+            context.read<CartBloc>().add(LoadCart());
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(

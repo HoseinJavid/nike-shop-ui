@@ -15,6 +15,7 @@ Dio initDio() {
     BaseOptions(
       baseUrl: emulatorUrl,
       connectTimeout: 5000,
+      receiveTimeout: 3000,
       validateStatus: (status) => true,
     ),
   );

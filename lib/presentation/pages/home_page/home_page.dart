@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practice/core/constants/constant.dart';
+import 'package:practice/core/error/m_exeption.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
@@ -60,6 +61,8 @@ class _HomePageState extends State<HomePage> {
                   state: state,
                   heightContainer: 250,
                   widthContainer: MediaQuery.of(context).size.width,
+                  onTryAgain: () =>
+                      context.read<HomeBloc>().add(HomeLoadStart()),
                 ),
               );
             } else if (state is HomeLoaded) {
@@ -117,15 +120,17 @@ class _HomePageState extends State<HomePage> {
 }
 
 class McwShowError extends StatelessWidget {
-  final HomeError state;
+  final AppError state;
   final double heightContainer;
   final double widthContainer;
+  final VoidCallback onTryAgain;
 
   const McwShowError({
     super.key,
     required this.state,
     required this.heightContainer,
     required this.widthContainer,
+    required this.onTryAgain,
   });
 
   @override
@@ -151,7 +156,7 @@ class McwShowError extends StatelessWidget {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                context.read<HomeBloc>().add(HomeLoadStart());
+                onTryAgain();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
@@ -282,7 +287,7 @@ class ShimmerCategoryButtoms extends StatelessWidget {
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
       child: Padding(
-        padding: const EdgeInsets.only(top: 13, bottom: 13,right: 8,left: 8),
+        padding: const EdgeInsets.only(top: 13, bottom: 13, right: 8, left: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -10,6 +10,7 @@ import 'package:practice/data/model/cart_Item.dart';
 import 'package:practice/data/model/cart_list.dart';
 import 'package:practice/gen/assets.gen.dart';
 import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
 class CartPage extends StatefulWidget {
@@ -44,8 +45,11 @@ class _CartPageState extends State<CartPage> {
                       height: 300,
                       child: SvgPicture.asset(
                         Assets.img.emptyCart,
-                        placeholderBuilder: (context) =>
-                            Center(child: CircularProgressIndicator()),
+                        placeholderBuilder: (context) => Center(
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 32),
@@ -59,8 +63,10 @@ class _CartPageState extends State<CartPage> {
             if (state.type == CartLoadingType.defult) {
               return Scaffold(
                 appBar: CommonAppbar(title: 'سبدخرید'),
-                floatingActionButton: McwFAB(title: 'پرداخت'),
-                body: Center(child: CircularProgressIndicator()),
+                // floatingActionButton: McwFAB(title: 'پرداخت'),
+                body: Center(child: CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                )),
               );
             }
           }
@@ -131,6 +137,22 @@ class _CartPageState extends State<CartPage> {
                         child: Text('ورود به حساب کاربری'),
                       ),
                     ],
+                  ),
+                ),
+              );
+            }
+          }
+          if (state is CartError) {
+            if (state.type == CartErrorType.networkError) {
+              return Scaffold(
+                appBar: CommonAppbar(title: 'سبدخرید'),
+                body: Center(
+                  child: McwShowError(
+                    state: state,
+                    heightContainer: 250,
+                    widthContainer: MediaQuery.of(context).size.width,
+                    onTryAgain: () =>
+                        BlocProvider.of<CartBloc>(context).add(LoadCart()),
                   ),
                 ),
               );

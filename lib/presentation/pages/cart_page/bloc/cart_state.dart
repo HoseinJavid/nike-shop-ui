@@ -31,7 +31,8 @@ final class CartLoaded extends CartState {
   List<Object> get props => [cartList];
 }
 
-final class CartError extends CartState {
+final class CartError extends CartState implements AppError {
+  @override
   final String message;
   final CartErrorType type;
   const CartError(this.message, this.type);

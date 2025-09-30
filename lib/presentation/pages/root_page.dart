@@ -7,14 +7,14 @@ import 'package:practice/presentation/pages/auth_page/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page/cart_page.dart';
 import 'package:practice/presentation/pages/home_page/home_page.dart';
 import 'package:practice/presentation/pages/paymentResult_page.dart';
-import 'package:practice/presentation/pages/product_detail_page.dart';
+import 'package:practice/presentation/pages/product_detail_page/product_detail_page.dart';
 import 'package:practice/presentation/pages/product_list_page/product_list_page.dart';
 import 'package:practice/presentation/pages/profile_page/profile_page.dart';
 
 final GoRouter routers = GoRouter(
   initialLocation: '/',
   routes: [
-    StatefulShellRoute(
+    StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return RootPage(navigationShell: navigationShell);
       },
@@ -23,7 +23,7 @@ final GoRouter routers = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) =>  ProfilePage(key: UniqueKey(),),
+              builder: (context, state) =>  ProfilePage(),
             ),
           ],
         ),
@@ -58,9 +58,10 @@ final GoRouter routers = GoRouter(
             ),
           ],
         ),
-      ], navigatorContainerBuilder: (BuildContext context, StatefulNavigationShell navigationShell, List<Widget> children) { 
-            return children[navigationShell.currentIndex];
-       },
+      ], 
+      // navigatorContainerBuilder: (BuildContext context, StatefulNavigationShell navigationShell, List<Widget> children) { 
+      //       return children[navigationShell.currentIndex];
+      //  },
     ),
 
     GoRoute(path: '/auth', builder: (context, state) => const AuthPage()),
@@ -88,9 +89,9 @@ class RootPage extends StatelessWidget {
             initialLocation: index == navigationShell.currentIndex,
           );
 
-          if (index == 0) {
-            navigationShell.goBranch(index, initialLocation: true);
-          }
+          // if (index == 0) {
+          //   navigationShell.goBranch(index, initialLocation: true);
+          // }
         },
         items: const [
           BottomNavigationBarItem(

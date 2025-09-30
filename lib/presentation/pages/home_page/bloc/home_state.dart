@@ -46,7 +46,8 @@ final class HomeLoaded extends HomeState {
   List<Object?> get props => [newestProducts];
 }
 
-final class HomeError extends HomeState {
+final class HomeError extends HomeState implements AppError {
+  @override
   final String message;
 
   const HomeError(this.message);
