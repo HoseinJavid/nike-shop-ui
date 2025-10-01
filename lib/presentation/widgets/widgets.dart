@@ -5,9 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice/core/constants/constant.dart';
+import 'package:practice/core/error/m_exeption.dart';
+import 'package:practice/core/utils/util.dart';
+import 'package:practice/data/model/comment.dart';
 import 'package:practice/data/model/product.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:practice/data/model/banner.dart' as my_banner;
 
@@ -62,6 +66,7 @@ class BannerList extends StatelessWidget {
         SizedBox(
           height: 250,
           child: PageView.builder(
+            controller: pageController,
             itemCount: banners.length,
             itemBuilder: (context, index) {
               return BannerWidget(imageUrl: banners[index].image);
@@ -104,7 +109,7 @@ class ProductList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return ProductWidget(
-            products: products[index],
+            product: products[index],
             layoutType: LayoutType.horizontalList,
           );
         },
@@ -157,11 +162,11 @@ class TitleProductWidget extends StatelessWidget {
 
 /// --------------------------------------------------------------------------
 class ProductWidget extends StatefulWidget {
-  final Product products;
+  final Product product;
   final LayoutType layoutType;
   const ProductWidget({
     super.key,
-    required this.products,
+    required this.product,
     required this.layoutType,
   });
 
@@ -180,6 +185,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       child: InkWell(
         onTap: () {
           // Navigate to product details page
+          context.push('/productDetail',extra: widget.product);
         },
         borderRadius: BorderRadius.circular(10),
         splashColor: Theme.of(context).primaryColor.withAlpha(15),
@@ -202,7 +208,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl: widget.products.image,
+                        imageUrl: widget.product.image,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -237,7 +243,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
               const SizedBox(height: 8),
               Text(
-                widget.products.title,
+                widget.product.title,
                 style: TextStyle(
                   fontSize:
                       widget.layoutType == LayoutType.grid ||
@@ -249,7 +255,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
               SizedBox(height: 10),
               Text(
-                '${widget.products.price} تومان',
+                formattedPrice(widget.product.previousPrice),
                 style: TextStyle(
                   fontSize:
                       widget.layoutType == LayoutType.grid ||
@@ -261,7 +267,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 ),
               ),
               Text(
-                '${widget.products.previousPrice} تومان',
+                formattedPrice(widget.product.price),
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ],
@@ -715,9 +721,16 @@ class McwButtomSheet extends StatelessWidget {
 }
 
 /// --------------------------------------------------------------------------
-class McwAppBarProductDetail extends StatelessWidget {
-  const McwAppBarProductDetail({super.key});
+class McwAppBarProductDetail extends StatefulWidget {
+  final String imageUrl;
+  const McwAppBarProductDetail({super.key, required this.imageUrl});
 
+  @override
+  State<McwAppBarProductDetail> createState() => _McwAppBarProductDetailState();
+}
+
+class _McwAppBarProductDetailState extends State<McwAppBarProductDetail> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -733,21 +746,26 @@ class McwAppBarProductDetail extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: CachedNetworkImage(
           imageUrl:
-              'https://s3.ir-thr-at1.arvanstorage.com/nike/legend-react-3-shield-running-shoe-WWzCLk.jpg',
+              widget.imageUrl,
           fit: BoxFit.cover,
         ),
       ),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new),
         onPressed: () {
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.favorite_border),
+          icon: isFavorite == false
+              ? Icon(Icons.favorite_border)
+              : Icon(Icons.favorite, color: Colors.red),
           onPressed: () {
             // Handle favorite action
+            setState(() {
+              isFavorite = !isFavorite;
+            });
           },
         ),
       ],
@@ -757,7 +775,8 @@ class McwAppBarProductDetail extends StatelessWidget {
 
 /// --------------------------------------------------------------------------
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({super.key});
+  final Comment comment;
+  const CommentWidget({super.key, required this.comment});
 
   @override
   Widget build(BuildContext context) {
@@ -777,11 +796,12 @@ class CommentWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'خیلی شیک وباحاله',
+                    comment.title,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
                   ),
                   Text(
-                    'چهارشنبه 20 مرداد 1404',
+                    DateTime.parse(comment.date)
+                        .toJalaliString(),
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
@@ -793,7 +813,7 @@ class CommentWidget extends StatelessWidget {
 
               SizedBox(height: 8),
               Text(
-                'این کتونی واقعا عالیه و من ازش خیلی راضی هستم. کیفیت ساخت بسیار بالاست و برای دویدن بسیار راحت است.',
+                comment.content,
                 style: TextStyle(fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -904,6 +924,206 @@ class McwTextButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(fontSize: 16, color: themeData.primaryColor),
+        ),
+      ),
+    );
+  }
+}
+
+///----------------------------------------------------------------------------
+
+class McwShowError extends StatelessWidget {
+  final AppError state;
+  final double heightContainer;
+  final double widthContainer;
+  final VoidCallback onTryAgain;
+
+  const McwShowError({
+    super.key,
+    required this.state,
+    required this.heightContainer,
+    required this.widthContainer,
+    required this.onTryAgain,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: heightContainer,
+      width: widthContainer,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              CupertinoIcons.wifi_exclamationmark,
+              size: 50,
+              color: Colors.grey,
+            ),
+            SizedBox(height: 10),
+            Text(
+              state.message,
+              style: TextStyle(fontSize: 18, color: Colors.grey),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                onTryAgain();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text('تلاش مجدد'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///---------------------------------------------------------------------------
+
+// Shimmer placeholders for loading state
+
+class ShimmerLogo extends StatelessWidget {
+  const ShimmerLogo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ShimmerSearchBar extends StatelessWidget {
+  const ShimmerSearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8, left: 8),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerBannerList extends StatelessWidget {
+  const ShimmerBannerList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 250,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        separatorBuilder: (context, index) => SizedBox(width: 8),
+        itemBuilder: (context, index) => Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 120,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerProductList extends StatelessWidget {
+  const ShimmerProductList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 324,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 4,
+        separatorBuilder: (context, index) => SizedBox(width: 8),
+        itemBuilder: (context, index) => Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 324,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerCategoryButtoms extends StatelessWidget {
+  const ShimmerCategoryButtoms({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 13, bottom: 13, right: 8, left: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 161,
+              height: 23,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            Container(
+              width: 89,
+              height: 23,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -10,11 +10,13 @@ import 'package:practice/data/datasources/product_data_source.dart';
 import 'package:practice/data/repository/auth_repository.dart';
 import 'package:practice/data/repository/banner_repository.dart';
 import 'package:practice/data/repository/cart_repository.dart';
+import 'package:practice/data/repository/comment_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
 import 'package:practice/di/service_locator.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
 import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:practice/presentation/pages/product_detail_page/bloc/product_detail_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
@@ -45,6 +47,11 @@ class MyBlocProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProfileBloc(getIt<AuthRepositoryImpl>()),
+        ),
+
+        BlocProvider(
+          create: (context) =>
+              ProductDetailBloc(getIt<CommentRepositoryImpl>()),
         ),
       ],
       child: child,

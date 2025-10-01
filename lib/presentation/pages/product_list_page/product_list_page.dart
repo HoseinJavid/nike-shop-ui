@@ -66,7 +66,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         final product = products[index];
                         return ProductWidget(
                           layoutType: layoutType,
-                          products: product,
+                          product: product,
                         );
                       },
                     ),
@@ -96,7 +96,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         final product = products[index];
                         return ProductWidget(
                           layoutType: layoutType,
-                          products: product,
+                          product: product,
                         );
                       },
                     ),
@@ -126,7 +126,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         final product = products[index];
                         return ProductWidget(
                           layoutType: layoutType,
-                          products: product,
+                          product: product,
                         );
                       },
                     ),
@@ -156,7 +156,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         final product = products[index];
                         return ProductWidget(
                           layoutType: layoutType,
-                          products: product,
+                          product: product,
                         );
                       },
                     ),

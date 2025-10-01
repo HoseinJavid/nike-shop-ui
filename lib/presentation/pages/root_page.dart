@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice/core/constants/constant.dart';
+import 'package:practice/data/model/product.dart';
 import 'package:practice/presentation/pages/PaymentInfo_page.dart';
 import 'package:practice/presentation/pages/auth_page/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page/cart_page.dart';
@@ -23,7 +24,7 @@ final GoRouter routers = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) =>  ProfilePage(),
+              builder: (context, state) => ProfilePage(),
             ),
           ],
         ),
@@ -48,7 +49,8 @@ final GoRouter routers = GoRouter(
                 ),
                 GoRoute(
                   path: 'productDetail',
-                  builder: (context, state) => const ProductDetailPage(),
+                  builder: (context, state) =>
+                      ProductDetailPage(product: state.extra as Product),
                 ),
                 GoRoute(
                   path: 'productList',
@@ -58,8 +60,8 @@ final GoRouter routers = GoRouter(
             ),
           ],
         ),
-      ], 
-      // navigatorContainerBuilder: (BuildContext context, StatefulNavigationShell navigationShell, List<Widget> children) { 
+      ],
+      // navigatorContainerBuilder: (BuildContext context, StatefulNavigationShell navigationShell, List<Widget> children) {
       //       return children[navigationShell.currentIndex];
       //  },
     ),

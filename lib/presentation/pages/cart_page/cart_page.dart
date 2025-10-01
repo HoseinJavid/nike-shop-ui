@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' show NumberFormat;
+import 'package:practice/core/utils/util.dart';
 import 'package:practice/data/model/cart_Item.dart';
 import 'package:practice/data/model/cart_list.dart';
 import 'package:practice/gen/assets.gen.dart';
@@ -336,7 +337,7 @@ class McwCartItem extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '${NumberFormat('#,###').format(cartItem.product.price)} تومان',
+                  formattedPrice(cartItem.product.price),
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -344,7 +345,7 @@ class McwCartItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${NumberFormat('#,###').format(cartItem.product.previousPrice)} تومان',
+                  formattedPrice(cartItem.product.previousPrice),
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
                 ),
               ],
@@ -416,7 +417,7 @@ class CartInfoWidget extends StatelessWidget {
                   ),
                   state == false
                       ? Text(
-                          '${NumberFormat('#,###').format(cartList.payablePrice)} تومان',
+                          formattedPrice(cartList.payablePrice),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -448,7 +449,7 @@ class CartInfoWidget extends StatelessWidget {
                       ? Text(
                           cartList.shippingCost == 0
                               ? 'رایگان'
-                              : '${NumberFormat('#,###').format(cartList.shippingCost)} تومان',
+                              : formattedPrice(cartList.shippingCost),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -479,7 +480,7 @@ class CartInfoWidget extends StatelessWidget {
                   ),
                   state == false
                       ? Text(
-                          '${NumberFormat('#,###').format(cartList.totalPrice)} تومان',
+                          formattedPrice(cartList.totalPrice),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
