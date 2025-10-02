@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice/core/utils/util.dart';
 import 'package:practice/data/model/product.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/product_detail_page/bloc/product_detail_bloc.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
@@ -30,7 +31,61 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: McwFAB(title: 'افزودن به سبدخرید'),
+        floatingActionButton: McwFAB(
+          title: BlocListener<CartBloc, CartState>(
+              listenWhen: (previous, current) =>
+                  current is CartItemAdded && previous is! CartItemAdded,
+              listener: (context, state) {
+                if (state is CartItemAdded) {
+                  final messenger = ScaffoldMessenger.of(context);
+                  // messenger
+                  //     .hideCurrentSnackBar();
+                  messenger.showSnackBar(
+                    SnackBar(
+                      content: Center(
+                        child: Text('با موفقیت به سبد خرید اضافه شد'),
+                      ),
+                      backgroundColor: Colors.blue,
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                }
+              },
+              child: BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    );
+                  } else if (state is CartLoaded) {
+                    return Text(
+                      textAlign: TextAlign.center,
+                      'افزودن به سبدخرید',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }
+                  return Text(
+                    textAlign: TextAlign.center,
+                    'افزودن به سبدخرید',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
+            ),
+          onTapFAB: () {
+            context.read<CartBloc>().add(
+                  AddCartItem(widget.product.id),
+            );
+          },
+        ),
         body: CustomScrollView(
           slivers: [
             McwAppBarProductDetail(imageUrl: widget.product.image),
@@ -135,7 +190,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.commets.length,
-                      (context, index) => CommentWidget(comment: state.commets[index],),
+                      (context, index) =>
+                          CommentWidget(comment: state.commets[index]),
                     ),
                   );
                 }

@@ -65,16 +65,29 @@ class _CartPageState extends State<CartPage> {
               return Scaffold(
                 appBar: CommonAppbar(title: 'سبدخرید'),
                 // floatingActionButton: McwFAB(title: 'پرداخت'),
-                body: Center(child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor,
-                )),
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
               );
             }
           }
           if (state is CartLoading) {
             if (state.type == CartLoadingType.itemCountChange) {
               return Scaffold(
-                floatingActionButton: McwFAB(title: 'پرداخت'),
+                floatingActionButton: McwFAB(
+                  title: Text(
+                    textAlign: TextAlign.center,
+                    'پرداخت',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTapFAB: () {},
+                ),
                 backgroundColor: Color(0xfff4f4f4),
                 appBar: CommonAppbar(title: 'سبدخرید'),
                 body: Padding(
@@ -157,11 +170,35 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ),
               );
+            } else if (state.type == CartErrorType.unknown) {
+              return Scaffold(
+                appBar: CommonAppbar(title: 'سبدخرید'),
+                body: Center(
+                  child: McwShowError(
+                    state: state,
+                    heightContainer: 250,
+                    widthContainer: MediaQuery.of(context).size.width,
+                    onTryAgain: () =>
+                        BlocProvider.of<CartBloc>(context).add(LoadCart()),
+                  ),
+                ),
+              );
             }
           }
           if (state is CartLoaded) {
             return Scaffold(
-              floatingActionButton: McwFAB(title: 'پرداخت'),
+              floatingActionButton: McwFAB(
+                title: Text(
+                  textAlign: TextAlign.center,
+                  'پرداخت',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTapFAB: () {},
+              ),
               backgroundColor: Color(0xfff4f4f4),
               appBar: CommonAppbar(title: 'سبدخرید'),
               body: Padding(

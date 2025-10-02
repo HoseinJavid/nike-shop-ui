@@ -16,7 +16,7 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final IauthRepository authRepository;
   final ICartDataSource cartDataSource;
-  CartBloc(this.authRepository, this.cartDataSource) : super(CartLoading()) {
+  CartBloc(this.authRepository, this.cartDataSource) : super(CartInitial()) {
     on<CartEvent>((event, emit) async {
       try {
         var prevState = state;
@@ -65,6 +65,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         }
         if (event is RemoveCartItem) {
           await cartDataSource.removeCart(event.cartItemId);
+        }
+        if (event is AddCartItem) {
+          emit(CartLoading());
+          await cartDataSource.addToCart(event.productId);
+          var cart = await cartDataSource.getCartListItems();
+          emit(CartItemAdded());
+          emit(CartLoaded(cart));
         }
       } catch (e) {
         if (e is DioError) {

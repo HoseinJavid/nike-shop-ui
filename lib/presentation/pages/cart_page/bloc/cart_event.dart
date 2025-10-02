@@ -31,9 +31,19 @@ class RemoveCartItem extends CartEvent {
   List<Object> get props => [cartItemId];
 }
 
+class AddCartItem extends CartEvent {
+  final int productId;
+  const AddCartItem(this.productId);
+
+  @override
+  List<Object> get props => [productId];
+}
+
 class RefreshCart extends CartEvent {
   const RefreshCart();
 
   @override
   List<Object> get props => [];
 }
+
+

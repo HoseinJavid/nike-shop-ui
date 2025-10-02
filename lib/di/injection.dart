@@ -40,10 +40,7 @@ class MyBlocProvider extends StatelessWidget {
           create: (context) => AuthBloc(getIt<AuthRepositoryImpl>()),
         ),
         BlocProvider(
-          create: (context) => CartBloc(
-            getIt<AuthRepositoryImpl>(),
-            getIt<CartRepositoryImpl>(),
-          ),
+          create: (context) => getIt<CartBloc>(),
         ),
         BlocProvider(
           create: (context) => ProfileBloc(getIt<AuthRepositoryImpl>()),

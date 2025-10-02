@@ -12,6 +12,7 @@ import 'package:practice/data/repository/banner_repository.dart';
 import 'package:practice/data/repository/cart_repository.dart';
 import 'package:practice/data/repository/comment_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -50,5 +51,9 @@ Future<void> setupServiceLocator() async {
     () => CommentRepositoryImpl(
       remote: CommentRemoteDataSourceImpl(httpClient: getIt<Dio>()),
     ),
+  );
+
+  getIt.registerLazySingleton(
+    () => CartBloc(getIt<AuthRepositoryImpl>(), getIt<CartRepositoryImpl>()),
   );
 }

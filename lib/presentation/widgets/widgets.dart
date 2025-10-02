@@ -9,6 +9,7 @@ import 'package:practice/core/error/m_exeption.dart';
 import 'package:practice/core/utils/util.dart';
 import 'package:practice/data/model/comment.dart';
 import 'package:practice/data/model/product.dart';
+import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -185,7 +186,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       child: InkWell(
         onTap: () {
           // Navigate to product details page
-          context.push('/productDetail',extra: widget.product);
+          context.push('/productDetail', extra: widget.product);
         },
         borderRadius: BorderRadius.circular(10),
         splashColor: Theme.of(context).primaryColor.withAlpha(15),
@@ -646,8 +647,9 @@ class _SortWidgetState extends State<SortWidget> {
 
 /// --------------------------------------------------------------------------
 class McwFAB extends StatelessWidget {
-  final String title;
-  const McwFAB({super.key, required this.title});
+  final Widget title ;
+  final VoidCallback onTapFAB;
+  const McwFAB({super.key, required this.title, required this.onTapFAB});
 
   @override
   Widget build(BuildContext context) {
@@ -657,6 +659,7 @@ class McwFAB extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
         onTap: () {
           // Handle add to cart action
+          onTapFAB();
         },
 
         child: SizedBox(
@@ -668,15 +671,7 @@ class McwFAB extends StatelessWidget {
               color: Theme.of(context).secondaryHeaderColor,
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Text(
-              textAlign: TextAlign.center,
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: title,
           ),
         ),
       ),
@@ -745,8 +740,7 @@ class _McwAppBarProductDetailState extends State<McwAppBarProductDetail> {
       shadowColor: Colors.black.withAlpha(100),
       flexibleSpace: FlexibleSpaceBar(
         background: CachedNetworkImage(
-          imageUrl:
-              widget.imageUrl,
+          imageUrl: widget.imageUrl,
           fit: BoxFit.cover,
         ),
       ),
@@ -800,8 +794,7 @@ class CommentWidget extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
                   ),
                   Text(
-                    DateTime.parse(comment.date)
-                        .toJalaliString(),
+                    DateTime.parse(comment.date).toJalaliString(),
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
@@ -812,10 +805,7 @@ class CommentWidget extends StatelessWidget {
               ),
 
               SizedBox(height: 8),
-              Text(
-                comment.content,
-                style: TextStyle(fontSize: 14),
-              ),
+              Text(comment.content, style: TextStyle(fontSize: 14)),
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -848,7 +838,7 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
-          // Navigator.pop(context);
+          context.go('/');
         },
       ),
       actions: [],

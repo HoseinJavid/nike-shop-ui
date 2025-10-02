@@ -43,11 +43,14 @@ final class CartError extends CartState implements AppError {
 
 final class CartEmpty extends CartState {}
 
-final class CartItemCountAdded extends CartState {}
+final class CartItemAdded extends CartState {
+  @override
+  List<Object> get props => super.props;
+}
 
-final class CartItemCountRemoved extends CartState {}
+// final class CartItemCountRemoved extends CartState {}
 
-final class CartItemUpdated extends CartState {}
+// final class CartItemUpdated extends CartState {}
 
 enum CartErrorType { notLoggedIn, networkError, unknown }
 
