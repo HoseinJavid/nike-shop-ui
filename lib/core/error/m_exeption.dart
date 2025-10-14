@@ -17,7 +17,8 @@ class ServerException extends AppException {
 
 class ValidationException extends AppException {
   final Map<String, dynamic>? errors;
-  ValidationException([super.message = "validation error", this.errors]);
+  ValidationException({message = "validation error", this.errors})
+    : super(message);
 }
 
 class UnauthorizedException extends AppException {
@@ -28,6 +29,10 @@ class NotFoundException extends AppException {
   NotFoundException([super.message = "not found"]);
 }
 
+class EmptyCartException extends AppException {
+  EmptyCartException([super.message = "cart is empty"]);
+}
+
 abstract class AppError {
-   String get message;
+  String get message;
 }

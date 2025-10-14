@@ -36,7 +36,10 @@ class _CartPageState extends State<CartPage> {
         builder: (context, state) {
           if (state is CartEmpty) {
             return Scaffold(
-              appBar: CommonAppbar(title: 'سبدخرید'),
+              appBar: CommonAppbar(
+                title: 'سبدخرید',
+                onTapBack: () => context.go('/'),
+              ),
               body: SizedBox.expand(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +66,10 @@ class _CartPageState extends State<CartPage> {
           if (state is CartLoading) {
             if (state.type == CartLoadingType.defult) {
               return Scaffold(
-                appBar: CommonAppbar(title: 'سبدخرید'),
+                appBar: CommonAppbar(
+                  title: 'سبدخرید',
+                  onTapBack: () => context.go('/'),
+                ),
                 // floatingActionButton: McwFAB(title: 'پرداخت'),
                 body: Center(
                   child: CircularProgressIndicator(
@@ -89,7 +95,10 @@ class _CartPageState extends State<CartPage> {
                   onTapFAB: () {},
                 ),
                 backgroundColor: Color(0xfff4f4f4),
-                appBar: CommonAppbar(title: 'سبدخرید'),
+                appBar: CommonAppbar(
+                  title: 'سبدخرید',
+                  onTapBack: () => context.go('/'),
+                ),
                 body: Padding(
                   padding: const EdgeInsets.only(
                     right: 16,
@@ -131,7 +140,10 @@ class _CartPageState extends State<CartPage> {
           if (state is CartError) {
             if (state.type == CartErrorType.notLoggedIn) {
               return Scaffold(
-                appBar: CommonAppbar(title: 'سبدخرید'),
+                appBar: CommonAppbar(
+                  title: 'سبدخرید',
+                  onTapBack: () => context.go('/'),
+                ),
                 body: SizedBox.expand(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +171,10 @@ class _CartPageState extends State<CartPage> {
           if (state is CartError) {
             if (state.type == CartErrorType.networkError) {
               return Scaffold(
-                appBar: CommonAppbar(title: 'سبدخرید'),
+                appBar: CommonAppbar(
+                  title: 'سبدخرید',
+                  onTapBack: () => context.go('/'),
+                ),
                 body: Center(
                   child: McwShowError(
                     state: state,
@@ -172,7 +187,10 @@ class _CartPageState extends State<CartPage> {
               );
             } else if (state.type == CartErrorType.unknown) {
               return Scaffold(
-                appBar: CommonAppbar(title: 'سبدخرید'),
+                appBar: CommonAppbar(
+                  title: 'سبدخرید',
+                  onTapBack: () => context.go('/'),
+                ),
                 body: Center(
                   child: McwShowError(
                     state: state,
@@ -197,10 +215,16 @@ class _CartPageState extends State<CartPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTapFAB: () {},
+                onTapFAB: () {
+
+                  context.push('/paymentInfo', extra: state.cartList);
+                },
               ),
               backgroundColor: Color(0xfff4f4f4),
-              appBar: CommonAppbar(title: 'سبدخرید'),
+              appBar: CommonAppbar(
+                title: 'سبدخرید',
+                onTapBack: () => context.go('/'),
+              ),
               body: Padding(
                 padding: const EdgeInsets.only(
                   right: 16,

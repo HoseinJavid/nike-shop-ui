@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:practice/core/error/m_exeption.dart';
 
@@ -14,6 +16,8 @@ mixin HttpResponseValidation {
       throw UnauthorizedException();
     } else if (response.statusCode == 404) {
       throw NotFoundException();
+    } else if (response.statusCode == 400 || response.statusCode == 422) {
+      throw ValidationException(errors: response.data);
     } else if (response.statusCode != 200) {
       throw AppException();
     }

@@ -6,13 +6,16 @@ import 'package:practice/data/datasources/auth_data_source.dart';
 import 'package:practice/data/datasources/banner_data_source.dart';
 import 'package:practice/data/datasources/cart_data_source.dart';
 import 'package:practice/data/datasources/comment_data_source.dart';
+import 'package:practice/data/datasources/order_data_source.dart';
 import 'package:practice/data/datasources/product_data_source.dart';
 import 'package:practice/data/repository/auth_repository.dart';
 import 'package:practice/data/repository/banner_repository.dart';
 import 'package:practice/data/repository/cart_repository.dart';
 import 'package:practice/data/repository/comment_repository.dart';
+import 'package:practice/data/repository/payment_order_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
 import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:practice/presentation/pages/payment_info_page/bloc/pre_payment_info_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -55,5 +58,13 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton(
     () => CartBloc(getIt<AuthRepositoryImpl>(), getIt<CartRepositoryImpl>()),
+  );
+
+  getIt.registerLazySingleton(
+    () => PrePaymentInfoBloc(
+      PaymentOrderRepositoryImpl(
+        remote: RemotePaymentOrderDataSourceImpl(httpClient: getIt<Dio>()),
+      ),
+    ),
   );
 }

@@ -3,9 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:practice/core/utils/util.dart';
 import 'package:practice/presentation/widgets/widgets.dart';
 
-class PaymentResultPage extends StatelessWidget {
-  final Map<String, dynamic> queryParameters;
-  const PaymentResultPage({super.key, required this.queryParameters});
+class CodConfrimResultPage extends StatelessWidget {
+  final int price;
+  final bool isSuccess;
+  final int orderId;
+  const CodConfrimResultPage({
+    super.key,
+    required this.price,
+    required this.isSuccess,
+    required this.orderId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class PaymentResultPage extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: CommonAppbar(title: 'رسیدپرداخت', onTapBack: () {}),
+        appBar: CommonAppbar(title: 'وضعیت سفارش', onTapBack: () {}),
         body: SizedBox.expand(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,9 +37,9 @@ class PaymentResultPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      queryParameters['status'] == 'success'
-                          ? 'پرداخت باموفقیت انجام شد'
-                          : 'پرداخت ناموفق بود',
+                      isSuccess
+                          ? 'سفارش باموفقیت ثبت شد'
+                          : 'ثبت سفارش ناموفق بود',
                       style: TextStyle(
                         color: themeData.primaryColor,
                         fontSize: 24,
@@ -45,9 +52,7 @@ class PaymentResultPage extends StatelessWidget {
                       children: [
                         Text('وضعیت سفارش', style: TextStyle(fontSize: 16)),
                         Text(
-                          queryParameters['status'] == 'success'
-                              ? 'پرداخت شد'
-                              : 'پرداخت نشد',
+                          isSuccess ? 'تایید شد' : 'تاییدنشد',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             color: Colors.black,
@@ -62,9 +67,7 @@ class PaymentResultPage extends StatelessWidget {
                       children: [
                         Text('مبلغ', style: TextStyle(fontSize: 16)),
                         Text(
-                          formattedPrice(
-                            (int.parse(queryParameters['amount'] ?? '0')) ~/ 10,
-                          ),
+                          formattedPrice((price)),
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             color: Colors.black,
@@ -77,9 +80,9 @@ class PaymentResultPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('شناسه تراکنش', style: TextStyle(fontSize: 16)),
+                        Text('شناسه سفارش', style: TextStyle(fontSize: 16)),
                         Text(
-                          queryParameters['refID'] ?? '',
+                          orderId.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             color: Colors.black,

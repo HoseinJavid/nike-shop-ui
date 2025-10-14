@@ -4,7 +4,7 @@ import 'package:practice/core/network/httpClient_remote.dart';
 import 'package:practice/core/theme/theme.dart';
 import 'package:practice/di/injection.dart';
 import 'package:practice/di/service_locator.dart';
-import 'package:practice/presentation/pages/PaymentInfo_page.dart';
+import 'package:practice/presentation/pages/payment_info_page/pre_payment_info_page.dart';
 import 'package:practice/presentation/pages/auth_page/auth_page.dart';
 import 'package:practice/presentation/pages/cart_page/cart_page.dart';
 import 'package:practice/presentation/pages/home_page/home_page.dart';

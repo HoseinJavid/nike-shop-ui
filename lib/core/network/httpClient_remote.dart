@@ -5,17 +5,19 @@ import 'package:practice/di/service_locator.dart';
 
 final String emulatorUrl = 'http://10.0.2.2:8085/api/v1';
 final String url = 'http://localhost:8085/api/v1';
-final String phone = 'http://10.18.0.78:8085/api/v1';
+final String phone = 'http://10.110.103.78:8085/api/v1';
 final String phone2 = 'http://192.168.1.101:8085/api/v1';
 
 late Dio _httpClient;
+// late Dio _httpClientSandboxZarinPal;
 
 Dio initDio() {
   _httpClient = Dio(
     BaseOptions(
-      baseUrl: emulatorUrl,
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      // baseUrl: emulatorUrl,
+      baseUrl: phone,
+      connectTimeout: 7000,
+      receiveTimeout: 7000,
       validateStatus: (status) => true,
     ),
   );
@@ -35,3 +37,16 @@ Dio initDio() {
 
   return _httpClient;
 }
+
+// Dio initDioSandboxZarinPal() {
+//   _httpClientSandboxZarinPal = Dio(
+//     BaseOptions(
+//       baseUrl: 'https://sandbox.zarinpal.com/pg/v4',
+//       connectTimeout: 5000,
+//       receiveTimeout: 3000,
+//       validateStatus: (status) => true,
+//     ),
+//   );
+
+//   return _httpClientSandboxZarinPal;
+// }

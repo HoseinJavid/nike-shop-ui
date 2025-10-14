@@ -16,6 +16,7 @@ import 'package:practice/di/service_locator.dart';
 import 'package:practice/presentation/pages/auth_page/bloc/auth_bloc.dart';
 import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:practice/presentation/pages/payment_info_page/bloc/pre_payment_info_bloc.dart';
 import 'package:practice/presentation/pages/product_detail_page/bloc/product_detail_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
@@ -39,9 +40,7 @@ class MyBlocProvider extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthBloc(getIt<AuthRepositoryImpl>()),
         ),
-        BlocProvider(
-          create: (context) => getIt<CartBloc>(),
-        ),
+        BlocProvider(create: (context) => getIt<CartBloc>()),
         BlocProvider(
           create: (context) => ProfileBloc(getIt<AuthRepositoryImpl>()),
         ),
@@ -50,6 +49,7 @@ class MyBlocProvider extends StatelessWidget {
           create: (context) =>
               ProductDetailBloc(getIt<CommentRepositoryImpl>()),
         ),
+        BlocProvider(create: (context) => getIt<PrePaymentInfoBloc>()),
       ],
       child: child,
     );

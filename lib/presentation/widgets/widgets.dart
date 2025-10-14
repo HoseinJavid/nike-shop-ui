@@ -209,6 +209,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
+                        errorWidget: (context, url, error) {
+                          debugPrint(error.toString());
+                          return Icon(Icons.error);
+                        },
                         imageUrl: widget.product.image,
                         fit: BoxFit.cover,
                       ),
@@ -829,7 +833,8 @@ class CommentWidget extends StatelessWidget {
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CommonAppbar({super.key, required this.title});
+  final VoidCallback onTapBack;
+  const CommonAppbar({super.key, required this.title, required this.onTapBack});
 
   @override
   Widget build(BuildContext context) {
@@ -838,7 +843,7 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
-          context.go('/');
+          onTapBack();
         },
       ),
       actions: [],
@@ -856,13 +861,13 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
 class McwElevatedButton extends StatelessWidget {
   final OnTapCallback ontap;
   final ThemeData themeData;
-  final String text;
+  final Widget widget;
 
   const McwElevatedButton({
     super.key,
     required this.themeData,
     required this.ontap,
-    required this.text,
+    required this.widget,
   });
 
   @override
@@ -876,7 +881,7 @@ class McwElevatedButton extends StatelessWidget {
         onPressed: () {
           ontap();
         },
-        child: Text(text, style: TextStyle(fontSize: 16)),
+        child: widget,
       ),
     );
   }
@@ -885,13 +890,13 @@ class McwElevatedButton extends StatelessWidget {
 /// --------------------------------------------------------------------------
 
 class McwTextButton extends StatelessWidget {
-  final String text;
+  final Widget widget;
   final OnTapCallback onTap;
   const McwTextButton({
     super.key,
     required this.themeData,
     required this.onTap,
-    required this.text,
+    required this.widget,
   });
 
   final ThemeData themeData;
@@ -911,10 +916,7 @@ class McwTextButton extends StatelessWidget {
         onPressed: () {
           onTap();
         },
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 16, color: themeData.primaryColor),
-        ),
+        child: widget,
       ),
     );
   }

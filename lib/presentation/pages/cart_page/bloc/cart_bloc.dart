@@ -62,6 +62,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           }
           var cart = await cartDataSource.getCartListItems();
           emit(CartLoaded(cart));
+          if (cart.cartItems.isEmpty) {
+            emit(CartEmpty());
+          }
         }
         if (event is RemoveCartItem) {
           await cartDataSource.removeCart(event.cartItemId);
