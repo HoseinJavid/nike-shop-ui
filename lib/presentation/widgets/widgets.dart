@@ -352,18 +352,24 @@ class _McwAppBarProductListState extends State<McwAppBarProductList> {
                   ),
                 ),
                 Expanded(child: SizedBox()),
-                IconButton(
-                  icon: Badge.count(
-                    alignment: AlignmentDirectional.centerEnd,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    count: 3,
-                    child: Icon(
-                      CupertinoIcons.shopping_cart,
-                      size: 30.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  onPressed: () {},
+                BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    return IconButton(
+                      icon: Badge.count(
+                        alignment: AlignmentDirectional.centerEnd,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        count: state is CartLoaded ? state.count : 0,
+                        child: Icon(
+                          CupertinoIcons.shopping_cart,
+                          size: 30.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        context.go('/carPage');
+                      },
+                    );
+                  },
                 ),
               ],
             ),
@@ -651,7 +657,7 @@ class _SortWidgetState extends State<SortWidget> {
 
 /// --------------------------------------------------------------------------
 class McwFAB extends StatelessWidget {
-  final Widget title ;
+  final Widget title;
   final VoidCallback onTapFAB;
   const McwFAB({super.key, required this.title, required this.onTapFAB});
 

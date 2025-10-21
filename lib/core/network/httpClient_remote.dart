@@ -5,8 +5,7 @@ import 'package:practice/di/service_locator.dart';
 
 final String emulatorUrl = 'http://10.0.2.2:8085/api/v1';
 final String url = 'http://localhost:8085/api/v1';
-final String phone = 'http://10.110.103.78:8085/api/v1';
-final String phone2 = 'http://192.168.1.101:8085/api/v1';
+final String phone = 'http://192.168.43.156:8085/api/v1';
 
 late Dio _httpClient;
 // late Dio _httpClientSandboxZarinPal;

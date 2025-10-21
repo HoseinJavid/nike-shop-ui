@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice/core/constants/constant.dart';
 import 'package:practice/core/error/m_exeption.dart';
 import 'package:practice/gen/assets.gen.dart';
@@ -75,14 +76,11 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.only(right: 8, left: 8),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'جستجوی محصولات',
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
+                        child: McwSearchFild(
+                          autoFocus: false,
+                          onTap: () {
+                            context.push('/search');
+                          }, onChanged: (String value) {  },
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -111,6 +109,27 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class McwSearchFild extends StatelessWidget {
+  final VoidCallback onTap;
+  final ValueChanged<String> onChanged;
+  final bool autoFocus;
+  const McwSearchFild({
+    super.key,
+    required this.onTap,
+    this.autoFocus = false,
+    required this.onChanged,
+  });
 
-
-
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      autofocus: autoFocus,
+      onChanged: (value) => onChanged(value),
+      onTap: () => onTap(),
+      decoration: InputDecoration(
+        hintText: 'جستجوی محصولات',
+        prefixIcon: Icon(Icons.search, color: Theme.of(context).primaryColor),
+      ),
+    );
+  }
+}

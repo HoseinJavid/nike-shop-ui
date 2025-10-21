@@ -20,6 +20,7 @@ import 'package:practice/presentation/pages/payment_info_page/bloc/pre_payment_i
 import 'package:practice/presentation/pages/product_detail_page/bloc/product_detail_bloc.dart';
 import 'package:practice/presentation/pages/product_list_page/bloc/product_list_bloc.dart';
 import 'package:practice/presentation/pages/profile_page/bloc/profile_bloc.dart';
+import 'package:practice/presentation/pages/search_page/bloc/search_bloc.dart';
 
 //service locator
 class MyBlocProvider extends StatelessWidget {
@@ -50,6 +51,7 @@ class MyBlocProvider extends StatelessWidget {
               ProductDetailBloc(getIt<CommentRepositoryImpl>()),
         ),
         BlocProvider(create: (context) => getIt<PrePaymentInfoBloc>()),
+        BlocProvider(create: (context) => getIt<SearchBloc>()),
       ],
       child: child,
     );

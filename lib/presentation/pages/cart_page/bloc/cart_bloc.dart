@@ -30,7 +30,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             if (cartCountResponse.count == 0) {
               emit(CartEmpty());
             } else {
-              emit(CartLoaded(cart));
+              emit(CartLoaded(cart,cartCountResponse.count));
             }
           } else {
             emit(
@@ -61,7 +61,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             await cartDataSource.removeCart(event.cartItemId);
           }
           var cart = await cartDataSource.getCartListItems();
-          emit(CartLoaded(cart));
+          var cartCountResponse = await cartDataSource.getCartCount();
+
+          emit(CartLoaded(cart, cartCountResponse.count));
           if (cart.cartItems.isEmpty) {
             emit(CartEmpty());
           }
@@ -73,8 +75,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(CartLoading());
           await cartDataSource.addToCart(event.productId);
           var cart = await cartDataSource.getCartListItems();
+          var cartCountResponse = await cartDataSource.getCartCount();
+
           emit(CartItemAdded());
-          emit(CartLoaded(cart));
+          emit(CartLoaded(cart, cartCountResponse.count));
         }
       } catch (e) {
         if (e is DioError) {

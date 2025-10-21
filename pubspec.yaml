@@ -29,6 +29,7 @@ dependencies:
   shamsi_date: ^1.1.1
   url_launcher: ^6.3.2
   app_links: ^6.4.1
+  lottie: ^3.3.1
 
 dev_dependencies:
   build_runner:
@@ -43,7 +44,8 @@ flutter:
   assets:
     - assets/img/
     - assets/fonts/
-
+    - assets/animation/splash/
+    - assets/animation/ 
   fonts:
     - family: IranYekan
       fonts:

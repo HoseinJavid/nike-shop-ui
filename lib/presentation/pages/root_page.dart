@@ -15,8 +15,12 @@ import 'package:practice/presentation/pages/paymentResult_page.dart';
 import 'package:practice/presentation/pages/product_detail_page/product_detail_page.dart';
 import 'package:practice/presentation/pages/product_list_page/product_list_page.dart';
 import 'package:practice/presentation/pages/profile_page/profile_page.dart';
+import 'package:practice/presentation/pages/search_page/search_page.dart';
+import 'package:practice/presentation/pages/splash.dart';
 
 final GoRouter routers = GoRouter(
+  // initialLocation: '/splash',
+  // initialLocation: '/search',
   initialLocation: '/',
   routes: [
     StatefulShellRoute.indexedStack(
@@ -49,11 +53,13 @@ final GoRouter routers = GoRouter(
                       PrePaymentInfoPage(cartList: state.extra as CartList),
                 ),
 
-                GoRoute(
-                  path: 'productDetail',
-                  builder: (context, state) =>
-                      ProductDetailPage(product: state.extra as Product),
-                ),
+                // GoRoute(
+                //   path: 'productDetail',
+                //   builder: (context, state) {
+                //     final product = state.extra as Product;
+                //     return ProductDetailPage(product: product);
+                //   },
+                // ),
                 GoRoute(
                   path: 'productList',
                   builder: (context, state) => ProductListPage(),
@@ -77,6 +83,17 @@ final GoRouter routers = GoRouter(
                     );
                   },
                 ),
+                GoRoute(
+                  path: '/search',
+                  builder: (context, state) => const SearchPage(),
+                ),
+                GoRoute(
+                  path: '/productDetail',
+                  builder: (context, state) {
+                    final product = state.extra as Product;
+                    return ProductDetailPage(product: product);
+                  },
+                ),
               ],
             ),
           ],
@@ -88,6 +105,7 @@ final GoRouter routers = GoRouter(
     ),
 
     GoRoute(path: '/auth', builder: (context, state) => const AuthPage()),
+    GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
   ],
 );
 

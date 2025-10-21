@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:practice/data/model/product.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -136,4 +137,16 @@ void navigateFromUri(Uri uri, BuildContext context) {
     final location = queryString.isEmpty ? path : '$path?$queryString';
     context.go(location);
   }
+}
+
+List<Product> filterProductsByTitle(List<Product> products, String query) {
+  return products
+      .where(
+        (product) => product.title.toLowerCase().contains(query.toLowerCase()),
+      )
+      .toList();
+}
+
+List<Product> filterProductsById(List<Product> products, int id) {
+  return products.where((product) => id == product.id).toList();
 }

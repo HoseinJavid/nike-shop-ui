@@ -16,6 +16,7 @@ import 'package:practice/data/repository/payment_order_repository.dart';
 import 'package:practice/data/repository/product_repository.dart';
 import 'package:practice/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:practice/presentation/pages/payment_info_page/bloc/pre_payment_info_bloc.dart';
+import 'package:practice/presentation/pages/search_page/bloc/search_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -67,4 +68,6 @@ Future<void> setupServiceLocator() async {
       ),
     ),
   );
+
+  getIt.registerLazySingleton(() => SearchBloc(getIt<ProductRepositoryImpl>()));
 }
